@@ -1,3 +1,5 @@
+package core;
+
 /**
  * this is the like dislike bar above each notice
  */

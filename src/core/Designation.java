@@ -1,3 +1,5 @@
+package core;
+
 public enum Designation {
     HOD, ASSISTANTPROF, TEACHER, DIRECTOR, PROFESSOR, JUNIORTEACHER, SENIORTEACHER;
 }

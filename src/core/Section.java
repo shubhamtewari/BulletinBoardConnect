@@ -1,3 +1,5 @@
+package core;
+
 /**
  * the section to twhich the various students belong, this will include branches and class sections
  * @author shubhamtewari

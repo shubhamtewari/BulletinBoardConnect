@@ -1,4 +1,6 @@
-public class Student extends Customer{
+package core;
+
+public class Student extends Customer {
     private int level;
     private Section section;
 
@@ -6,7 +8,7 @@ public class Student extends Customer{
     constructor
     student is given write access to the bulletin board
      */
-    Student(String name) {
+    public Student(String name) {
         super(name);
         writeAccess = true;
     }

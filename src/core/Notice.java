@@ -1,5 +1,6 @@
+package core;
+
 import java.util.ArrayList;
-import java.util.Dictionary;
 
 /**
  * the notice posted on the bulletin board

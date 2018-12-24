@@ -1,3 +1,5 @@
+package core;
+
 public class Faculty extends Customer {
     private Designation designation;
     private Section section;

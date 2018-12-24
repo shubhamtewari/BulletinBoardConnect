@@ -1,3 +1,5 @@
+package core;
+
 import java.util.Dictionary;
 
 public class Poll {

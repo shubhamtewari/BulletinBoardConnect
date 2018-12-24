@@ -1,3 +1,5 @@
+package core;
+
 /**
  * this class manage the opinions in each opinion bar
  */
