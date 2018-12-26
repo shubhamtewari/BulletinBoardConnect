@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Region?>
+
+<BorderPane fx:id="borderPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="400.0" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.NoticeController">
+   <top>
+      <HBox prefHeight="30.0" BorderPane.alignment="CENTER">
+         <children>
+            <Region fx:id="positive" onMouseDragged="#dragWindow" onMousePressed="#setOffset" prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: #00a86b;" />
+            <Region fx:id="negative" onMouseDragged="#dragWindow" onMousePressed="#setOffset" prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: #bf0a30;" />
+         </children>
+      </HBox>
+   </top>
+   <center>
+      <Button fx:id="closeButton" mnemonicParsing="false" onAction="#closeNotice" text="close notice" BorderPane.alignment="CENTER" />
+   </center>
+</BorderPane>

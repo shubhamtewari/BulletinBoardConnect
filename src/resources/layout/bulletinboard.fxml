@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: #d4d4d4;" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.Controller">
+   <top>
+      <HBox prefHeight="50.0" prefWidth="200.0" style="-fx-background-color: #3d251b;" BorderPane.alignment="CENTER" />
+   </top>
+   <center>
+      <Button fx:id="but" onAction="#createWindow">
+         <text>this button</text>
+      </Button>
+   </center>
+</BorderPane>
