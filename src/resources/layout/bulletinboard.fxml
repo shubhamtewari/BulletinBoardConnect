@@ -4,13 +4,11 @@
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.HBox?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: #d4d4d4;" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.Controller">
+<BorderPane fx:id="borderPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="600.0" style="-fx-background-color: #d4d4d4;" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.Controller">
    <top>
-      <HBox prefHeight="50.0" prefWidth="200.0" style="-fx-background-color: #3d251b;" BorderPane.alignment="CENTER" />
+      <HBox fx:id="hbox" prefHeight="50.0" prefWidth="200.0" style="-fx-background-color: #3d251b;" BorderPane.alignment="CENTER">
+         <children>
+            <Button fx:id="draggableBut" mnemonicParsing="false" onAction="#createWindow" prefHeight="58.0" prefWidth="90.0" text="Open Admin" />
+         </children></HBox>
    </top>
-   <center>
-      <Button fx:id="but" onAction="#createWindow">
-         <text>this button</text>
-      </Button>
-   </center>
 </BorderPane>
