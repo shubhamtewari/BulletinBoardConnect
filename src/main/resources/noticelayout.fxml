@@ -8,8 +8,9 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.Region?>
 <?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
 
-<BorderPane fx:id="borderPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" style="-fx-background-color: #ffffff;" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.NoticeController">
+<BorderPane fx:id="borderPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" style="-fx-background-color: #ffffff;" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1" fx:controller="NoticeController">
    <top>
       <HBox prefHeight="30.0" BorderPane.alignment="CENTER">
          <children>
@@ -28,10 +29,25 @@
    <center>
       <VBox fx:id="noticeText" minHeight="100.0" BorderPane.alignment="CENTER">
          <children>
-            <Label fx:id="titleText" text="&lt;title&gt;" />
-            <Label fx:id="bodyText" text="&lt;body&gt;" textAlignment="JUSTIFY" />
-            <Label fx:id="authorText" text="&lt;author&gt;" />
+            <Label fx:id="titleText" text="&lt;title&gt;">
+               <font>
+                  <Font name="System Bold" size="14.0" />
+               </font>
+               <padding>
+                  <Insets bottom="8.0" />
+               </padding></Label>
+            <Label fx:id="bodyText" text="&lt;body&gt;" textAlignment="JUSTIFY">
+               <padding>
+                  <Insets bottom="3.0" />
+               </padding></Label>
+            <Label fx:id="authorText" text="&lt;author&gt;" textFill="#979191">
+               <font>
+                  <Font name="System Italic" size="13.0" />
+               </font></Label>
          </children>
+         <padding>
+            <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+         </padding>
       </VBox>
    </center>
    <effect>

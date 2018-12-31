@@ -12,7 +12,7 @@ public class Customer {
     constructor
     all privileges false
      */
-    Customer(String name) {
+    public Customer(String name) {
         this.name = name;
     }
 

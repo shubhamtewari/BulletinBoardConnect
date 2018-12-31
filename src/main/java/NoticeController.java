@@ -1,5 +1,3 @@
-package controllers;
-
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
@@ -51,9 +49,7 @@ public class NoticeController implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        titleText.setText("This is a sample title.");
-        bodyText.setText("sample body");
-        authorText.setText("@shbmtewari");
+
 
     }
 }

@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Menu?>
+<?import javafx.scene.control.MenuBar?>
+<?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.FlowPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+
+<BorderPane fx:id="borderPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="700.0" style="-fx-background-color: #d4d4d4;" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1" fx:controller="BoardController">
+   <top>
+      <VBox BorderPane.alignment="CENTER">
+         <children>
+            <MenuBar>
+              <menus>
+                <Menu text="File">
+                    <MenuItem text="Load..." />
+                    <MenuItem text="Save" />
+                    <MenuItem text="Save As..." />
+                    <MenuItem text="Settings" />
+                    <MenuItem text="Close" />
+                </Menu>
+                <Menu text="Edit">
+                    <Menu text="Insert">
+                        <MenuItem fx:id="insertNotice" onAction="#onInsertNotice" text="Notice" />
+                        <MenuItem fx:id="insertPoll" onAction="#onInsertPoll" text="Poll" />
+                        <Menu text="Widget">
+                            <MenuItem text="Weather Widget"/>
+                            <MenuItem text="Time Widget"/>
+                            <MenuItem text="Date Widget"/>
+                            <MenuItem text="Day Widget"/>
+                        </Menu>
+                    </Menu>
+                    <Menu text="Sort">
+                        <MenuItem text="By Date" />
+                        <MenuItem text="By Priority" />
+                    </Menu>
+                    <MenuItem text="Delete" />
+                </Menu>
+                <Menu text="Help">
+                    <MenuItem text="Conventions" />
+                    <MenuItem text="About" />
+                </Menu>
+              </menus>
+            </MenuBar>
+
+             <HBox prefHeight="100.0" prefWidth="200.0" style="-fx-background-color: #ffffff;" />
+
+         </children>
+      </VBox>
+   </top>
+
+   <center>
+      <FlowPane fx:id="flowPaneNotices" prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER" />
+   </center>
+</BorderPane>
