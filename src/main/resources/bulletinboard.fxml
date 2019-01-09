@@ -8,28 +8,35 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 
-<BorderPane fx:id="borderPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="700.0" style="-fx-background-color: #d4d4d4;" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1" fx:controller="BoardController">
+<BorderPane fx:id="borderPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="700.0" style="-fx-background-color: #d4d4d4;" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.BoardController">
    <top>
       <VBox BorderPane.alignment="CENTER">
          <children>
             <MenuBar>
               <menus>
                 <Menu text="File">
-                    <MenuItem text="Load..." />
-                    <MenuItem text="Save" />
-                    <MenuItem text="Save As..." />
+                    <MenuItem text="Load..." onAction="#onLoadBoard" />
+                    <MenuItem text="Save" onAction="#onSaveBoard" fx:id="menuItemLoad"/>
+                    <MenuItem text="Save As..." onAction="#onSaveAsBoard"/>
                     <MenuItem text="Settings" />
-                    <MenuItem text="Close" />
+                    <MenuItem text="Close" onAction="#onClose"/>
                 </Menu>
                 <Menu text="Edit">
                     <Menu text="Insert">
-                        <MenuItem fx:id="insertNotice" onAction="#onInsertNotice" text="Notice" />
+                        <Menu text="Notice">
+                            <MenuItem fx:id="insertTextNotice" onAction="#onInsertTextNotice" text="Text Notice" />
+                            <MenuItem fx:id="insertImageNotice" onAction="#onInsertImageNotice" text="Image Notice"/>
+                        </Menu>
                         <MenuItem fx:id="insertPoll" onAction="#onInsertPoll" text="Poll" />
                         <Menu text="Widget">
                             <MenuItem text="Weather Widget"/>
-                            <MenuItem text="Time Widget"/>
+                            <MenuItem text="Time Widget" onAction="#OnAddTimeDateDayWidget"/>
                             <MenuItem text="Date Widget"/>
                             <MenuItem text="Day Widget"/>
+                        </Menu>
+                        <Menu text="Window">
+                            <MenuItem text="High Priority Notice" onAction="#onInsertHighPriorityNotice"/>
+                            <MenuItem text="Web Viewer" />
                         </Menu>
                     </Menu>
                     <Menu text="Sort">
@@ -37,6 +44,7 @@
                         <MenuItem text="By Priority" />
                     </Menu>
                     <MenuItem text="Delete" />
+                    <MenuItem text="Clear"/>
                 </Menu>
                 <Menu text="Help">
                     <MenuItem text="Conventions" />
@@ -45,7 +53,7 @@
               </menus>
             </MenuBar>
 
-             <HBox prefHeight="100.0" prefWidth="200.0" style="-fx-background-color: #ffffff;" />
+             <HBox prefHeight="100.0" prefWidth="200.0" style="-fx-background-color: #ffffff;" fx:id="hBoxWidgetBar"/>
 
          </children>
       </VBox>

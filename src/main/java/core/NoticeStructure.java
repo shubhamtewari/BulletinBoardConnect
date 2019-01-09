@@ -4,13 +4,13 @@ package core;
  * notice data structure
  * @author shbmtewari@gmail.com
  */
-public class Notice {
+public class NoticeStructure implements Pinnable{
     private long id;
     private String title;
     private String body;
-    private Customer author;
+    private CustomerStructure author;
 
-    public Notice(long id, String title, String body, Customer author) {
+    public NoticeStructure(long id, String title, String body, CustomerStructure author) {
         this.id = id;
         this.title = title;
         this.body = body;

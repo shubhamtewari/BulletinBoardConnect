@@ -10,17 +10,17 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane fx:id="borderPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" style="-fx-background-color: #ffffff;" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1" fx:controller="NoticeController">
+<BorderPane fx:id="borderPane" style="-fx-background-color: #ffffff;" xmlns="http://javafx.com/javafx/8.0.192" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.NoticeController">
    <top>
       <HBox prefHeight="30.0" BorderPane.alignment="CENTER">
          <children>
-            <Region fx:id="positive" prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: #00a86b;" />
-            <Region fx:id="negative" prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: #bf0a30;" />
+            <Region fx:id="regionPositive" prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: #00a86b;" />
+            <Region fx:id="regionNegative" prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: #bf0a30;" />
          </children>
       </HBox>
    </top>
    <bottom>
-      <Button fx:id="closeButton" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#removeNotice" onMouseClicked="#removeNotice" opacity="0.75" style="-fx-background-color: #ff0000; -fx-text-fill: #ffffffff; -fx-background-radius: 15; -fx-border-radius: 15;" text="X" textAlignment="CENTER" BorderPane.alignment="CENTER">
+      <Button fx:id="closeButton" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false"  opacity="0.75" style="-fx-background-color: #ff0000; -fx-text-fill: #ffffffff; -fx-background-radius: 15; -fx-border-radius: 15;" text="X" textAlignment="CENTER" BorderPane.alignment="CENTER">
          <BorderPane.margin>
             <Insets bottom="6.0" />
          </BorderPane.margin>
@@ -29,18 +29,15 @@
    <center>
       <VBox fx:id="noticeText" minHeight="100.0" BorderPane.alignment="CENTER">
          <children>
-            <Label fx:id="titleText" text="&lt;title&gt;">
+            <Label fx:id="labelTitleText" text="&lt;title&gt;">
                <font>
                   <Font name="System Bold" size="14.0" />
                </font>
                <padding>
                   <Insets bottom="8.0" />
                </padding></Label>
-            <Label fx:id="bodyText" text="&lt;body&gt;" textAlignment="JUSTIFY">
-               <padding>
-                  <Insets bottom="3.0" />
-               </padding></Label>
-            <Label fx:id="authorText" text="&lt;author&gt;" textFill="#979191">
+            <Label fx:id="labelBodyText" text="&lt;body&gt;" textAlignment="JUSTIFY" />
+            <Label fx:id="labelAuthorText" text="&lt;author&gt;" textFill="#979191">
                <font>
                   <Font name="System Italic" size="13.0" />
                </font></Label>
