@@ -29,10 +29,8 @@
                         </Menu>
                         <MenuItem fx:id="insertPoll" onAction="#onInsertPoll" text="Poll" />
                         <Menu text="Widget">
-                            <MenuItem text="Weather Widget"/>
-                            <MenuItem text="Time Widget" onAction="#OnAddTimeDateDayWidget"/>
-                            <MenuItem text="Date Widget"/>
-                            <MenuItem text="Day Widget"/>
+                            <MenuItem text="Weather Widget" onAction="#OnAddWeatherWidget"/>
+                            <MenuItem text="Time And Date Widget" onAction="#OnAddTimeDateDayWidget"/>
                         </Menu>
                         <Menu text="Window">
                             <MenuItem text="High Priority Notice" onAction="#onInsertHighPriorityNotice"/>

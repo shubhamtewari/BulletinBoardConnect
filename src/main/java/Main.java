@@ -1,9 +1,12 @@
+import api.OpenWeatherMapJSONDataRetriever;
 import controllers.BoardController;
 import models.BoardModel;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
+
+import java.util.Scanner;
 
 public class Main extends Application {
 
@@ -21,6 +24,10 @@ public class Main extends Application {
         }
 
     public static void main(String[] args) {
+        //Scanner sc = new Scanner(System.in);
+        //String zip = sc.nextLine();
+        //OpenWeatherMapJSONDataRetriever openWeatherMapJSONDataRetriever = new OpenWeatherMapJSONDataRetriever();
+        //System.out.println("This is \n"+openWeatherMapJSONDataRetriever.setupConn(zip));
         launch(args);
 
     }

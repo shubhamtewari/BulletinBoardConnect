@@ -1,5 +1,6 @@
 package controllers;
 
+import api.OpenWeatherMapJSONDataRetriever;
 import core.CustomerStructure;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -52,6 +53,12 @@ public class BoardController implements Initializable {
     MenuItem menuItemLoad;
     @FXML
     HBox hBoxWidgetBar;
+
+    //ESSENTIAL METHODS>>>>>>>>>>>>>>
+    String getWeatherData(api.WeatherDataRetriever weatherDataRetriever, String string)throws Exception {
+        return weatherDataRetriever.setupConn(string).toString();
+    }
+    //<<<<<<<<<<<<<<<ESSENTIAL METHODS END
 
     //insert menu options MVC listeners begin>>>>>>>>>>>>>>>>>>>
     @FXML
@@ -131,6 +138,18 @@ public class BoardController implements Initializable {
     public void OnAddTimeDateDayWidget(ActionEvent actionEvent) throws IOException {
         FXMLLoader fxmlLoaderTimeDateDay = new FXMLLoader(getClass().getResource("/datewidgetlayout.fxml"));
         hBoxWidgetBar.getChildren().add(fxmlLoaderTimeDateDay.load());
+    }
+
+    @FXML
+    void OnAddWeatherWidget() {
+        WeatherInputStageController weatherInputStageController = new WeatherInputStageController();
+        weatherInputStageController.setUpUI();
+        try {
+            System.out.println(getWeatherData(new OpenWeatherMapJSONDataRetriever(), weatherInputStageController.information));
+        }catch (Exception e) {
+            System.out.println("Wrong Input!!");
+            //e.printStackTrace();
+        }
     }
     //insert menu options MVC listeners end<<<<<<<<<<<<<<<<<<<<<<<<
 

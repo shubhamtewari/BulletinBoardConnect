@@ -8,6 +8,8 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.TextAlignment;
+import javafx.stage.Stage;
+
 import java.net.URL;
 import java.util.ResourceBundle;
 
@@ -43,6 +45,9 @@ public class HighPriorityNoticeController implements Initializable {
         vBoxNoticeDisplay.getChildren().addAll(labelTitle, labelBody, labelAuthor);
         vBoxNoticeDisplay.setAlignment(Pos.CENTER);
         vBoxNoticeDisplay.setSpacing(15);
+
+        Stage stage = (Stage)labelOr.getScene().getWindow();
+        stage.setAlwaysOnTop(true);
 
         borderPane.setCenter(vBoxNoticeDisplay);
     }
