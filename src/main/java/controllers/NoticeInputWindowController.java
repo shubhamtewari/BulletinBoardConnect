@@ -13,8 +13,6 @@ import javafx.stage.Stage;
 import models.NoticeModel;
 
 public class NoticeInputWindowController {
-    private NoticeModel noticeModel;
-
     private Stage stage;
     private VBox vBox;
     private Scene scene;
@@ -81,9 +79,9 @@ public class NoticeInputWindowController {
         arrayNoticeInformation[1] = textAreaNoticeBodyInput.getText();
         arrayNoticeInformation[2] = textFieldNoticeAuthorInput.getText();
 
-        if(textFieldNoticeAuthorInput.getText().toString().equals(""))
+        if(textFieldNoticeAuthorInput.getText().equals(""))
             arrayNoticeInformation[2] = "anonymous";
-        if(textAreaNoticeBodyInput.getText().toString().trim().equals("")) {
+        if(textAreaNoticeBodyInput.getText().trim().equals("")) {
             //System.out.println("hi");
             SmallErrorDialogController errorNullBody = new SmallErrorDialogController(SmallErrorDialogController.ERROR, "Enter body of notice!", "Okay");
             errorNullBody.showDialogAndWait();

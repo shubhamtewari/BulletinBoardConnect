@@ -1,5 +1,7 @@
 package api;
 
+import com.google.gson.Gson;
+
 import java.io.BufferedInputStream;
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -13,7 +15,7 @@ public class OpenWeatherMapJSONDataRetriever implements WeatherDataRetriever<Str
     URLConnection urlConnection;
     @Override
     public String setupConn(String data) throws Exception {
-        url = new URL("http://api.openweathermap.org/data/2.5/forecast?zip="+data+",in&APPID="+new APIKey().getAPIKEY());
+        url = new URL("http://api.openweathermap.org/data/2.5/forecast?zip="+data+",in&APPID="+new APIKey().getAPIKEY()+"&units=metric");
         urlConnection = url.openConnection();
         return getWeatherData();
     }
@@ -27,5 +29,17 @@ public class OpenWeatherMapJSONDataRetriever implements WeatherDataRetriever<Str
                 stringBuilder.append(line);
             }
         return stringBuilder.toString();
+    }
+
+    /**
+     * converts the given json to a deserialized format i.e object
+     * also filters through values not required
+     * by omitting instances not required
+     * @param jsonString the input json format string
+     * @return Object with the converted values
+     */
+    public WeatherStructure convertToDeserialized(String jsonString) {
+        Gson gson = new Gson();
+        return gson.fromJson(jsonString, WeatherStructure.class);
     }
 }

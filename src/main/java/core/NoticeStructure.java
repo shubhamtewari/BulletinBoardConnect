@@ -5,41 +5,87 @@ package core;
  * @author shbmtewari@gmail.com
  */
 public class NoticeStructure implements Pinnable{
-    private long id;
-    private String title;
-    private String body;
-    private CustomerStructure author;
+    private long noticeTimeStamp;
+    private String noticeDate;
+    private String noticeTitle;
+    private String noticeBody;
+    private String imagePath;
+    private int positiveVotes;
+    private int negativeVotes;
+    private CustomerStructure noticeCustomer;
 
-    public NoticeStructure(long id, String title, String body, CustomerStructure author) {
-        this.id = id;
-        this.title = title;
-        this.body = body;
-        this.author = author;
+    public NoticeStructure(long noticeTimeStamp, String noticeDate, String noticeTitle, String noticeBody, String imagePath,int positiveVotes, int negativeVotes, CustomerStructure noticeCustomer) {
+        this.noticeTimeStamp = noticeTimeStamp;
+        this.noticeDate = noticeDate;
+        this.noticeTitle = noticeTitle;
+        this.noticeBody = noticeBody;
+        this.imagePath = imagePath;
+        this.positiveVotes = positiveVotes;
+        this.negativeVotes = negativeVotes;
+        this.noticeCustomer = noticeCustomer;
     }
 
-    public long getId() {
-        return id;
+    public long getNoticeTimeStamp() {
+        return noticeTimeStamp;
     }
 
-    public void setId(long id) { this.id = id; }
-
-    public String getTitle() {
-        return title;
+    public void setNoticeTimeStamp(long noticeTimeStamp) {
+        this.noticeTimeStamp = noticeTimeStamp;
     }
 
-    public void setTitle(String title) {
-        this.title = title;
+    public String getNoticeTitle() {
+        return noticeTitle;
     }
 
-    public String getBody() {
-        return body;
+    public void setNoticeTitle(String noticeTitle) {
+        this.noticeTitle = noticeTitle;
     }
 
-    public void setBody(String body) {
-        this.body = body;
+    public String getNoticeBody() {
+        return noticeBody;
     }
 
-    public String getAuthor() {
-        return author.getName();
+    public void setNoticeBody(String noticeBody) {
+        this.noticeBody = noticeBody;
+    }
+
+    public int getPositiveVotes() {
+        return positiveVotes;
+    }
+
+    public void setPositiveVotes(int positiveVotes) {
+        this.positiveVotes = positiveVotes;
+    }
+
+    public int getNegativeVotes() {
+        return negativeVotes;
+    }
+
+    public void setNegativeVotes(int negativeVotes) {
+        this.negativeVotes = negativeVotes;
+    }
+
+    public CustomerStructure getNoticeCustomer() {
+        return noticeCustomer;
+    }
+
+    public void setNoticeCustomer(CustomerStructure noticeCustomer) {
+        this.noticeCustomer = noticeCustomer;
+    }
+
+    public String getNoticeDate() {
+        return noticeDate;
+    }
+
+    public void setNoticeDate(String noticeDate) {
+        this.noticeDate = noticeDate;
+    }
+
+    public String getImagePath() {
+        return imagePath;
+    }
+
+    public void setImagePath(String imagePath) {
+        this.imagePath = imagePath;
     }
 }

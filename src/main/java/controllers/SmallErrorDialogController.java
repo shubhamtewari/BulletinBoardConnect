@@ -12,16 +12,16 @@ import javafx.stage.StageStyle;
 
 public class SmallErrorDialogController {
 
-    Stage stage;
-    Scene scene;
-    VBox vBox;
+    private Stage stage;
+    private Scene scene;
+    private VBox vBox;
 
     static final String ERROR = "Error";
     static final String INFO = "Information";
     static final String DIALOG = "Dialog";
 
-    Label labelMessage;
-    Button buttonClick;
+    private Label labelMessage;
+    private Button buttonClick;
 
     public SmallErrorDialogController(final String type, String message, String buttonText) {
         stage = new Stage();
@@ -46,7 +46,7 @@ public class SmallErrorDialogController {
         buttonClick.setOnMouseClicked(event -> stage.close());
     }
 
-    void showDialogAndWait() {
+    public void showDialogAndWait() {
         stage.showAndWait();
     }
 }

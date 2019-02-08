@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Menu?>
+<?import javafx.scene.control.MenuBar?>
+<?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Region?>
+<?import javafx.scene.layout.VBox?>
+
+<BorderPane fx:id="borderPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="700.0" style="-fx-background-color: #d4d4d4;" xmlns="http://javafx.com/javafx/8.0.192" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.BulletinBoxController">
+   <top>
+      <VBox alignment="TOP_CENTER" BorderPane.alignment="CENTER">
+         <children>
+            <MenuBar>
+              <menus>
+                <Menu text="File">
+                    <MenuItem onAction="#onCreateBoard" text="Create..." />
+                    <MenuItem onAction="#onLoadBoard" text="Load..." />
+                    <MenuItem fx:id="menuItemSave" onAction="#onSaveBoard" text="Save" />
+                    <MenuItem onAction="#onSaveAsBoard" text="Save As..." />
+                    <MenuItem text="Settings" />
+                    <MenuItem fx:id="menuItemClose" onAction="#onClose" text="Close" />
+                    <MenuItem onAction="#onQuit" text="Quit" />
+                </Menu>
+                  <Menu fx:id="menuItemWorkspace" text="Workspace">
+                      <MenuItem fx:id="m" text="Workspace" />
+                  </Menu>
+                <Menu text="Edit">
+                    <Menu text="Insert">
+                        <Menu fx:id="menuItemInsertNotice" text="Notice">
+                            <MenuItem fx:id="insertTextNotice" onAction="#onInsertTextNotice" text="Text Notice" />
+                            <MenuItem fx:id="insertImageNotice" onAction="#onInsertImageNotice" text="Image Notice" />
+                        </Menu>
+                        <MenuItem fx:id="menuItemInsertPoll" onAction="#onInsertPoll" text="Poll" />
+                        <Menu fx:id="menuItemWidget" text="Widget">
+                            <MenuItem onAction="#OnAddWeatherWidget" text="Weather Widget" />
+                            <MenuItem onAction="#OnAddTimeDateDayWidget" text="Time And Date Widget" />
+                        </Menu>
+                        <Menu text="Window">
+                            <MenuItem onAction="#onInsertHighPriorityNotice" text="High Priority Notice" />
+                            <MenuItem text="Web Viewer" />
+                        </Menu>
+                    </Menu>
+                    <Menu fx:id="menuItemSort" text="Sort">
+                        <MenuItem text="By Date" />
+                        <MenuItem text="By Priority" />
+                    </Menu>
+                    <MenuItem fx:id="menuItemDelete" text="Delete" />
+                    <MenuItem fx:id="menuItemClear" text="Clear" />
+                </Menu>
+                  <Menu text="Connect">
+                      <MenuItem fx:id="menuItemConnect" onAction="#onConnect" text="Connect..." />
+                      <MenuItem fx:id="menuItemUpload" onAction="#onUpload" text="Upload" />
+                  </Menu>
+                <Menu text="Help">
+                    <MenuItem text="Conventions" />
+                    <MenuItem text="About" />
+                </Menu>
+              </menus>
+            </MenuBar>
+             <HBox fx:id="hBoxWidgetBar" prefHeight="80.0" style="-fx-background-color: #ffffff;" />
+            <Region fx:id="regionConnectionStatus" maxHeight="10.0" minHeight="1.0" prefHeight="1.0" style="-fx-background-color: #ff1919;" />
+            <Label fx:id="labelConnectionStatus" text="*offline*" textAlignment="CENTER" textFill="#837d7d">
+               <padding>
+                  <Insets top="1.0" />
+               </padding>
+            </Label>
+         </children>
+      </VBox>
+   </top>
+    <center>
+
+    </center>
+   <bottom>
+      <VBox BorderPane.alignment="CENTER">
+         <children>
+            <Region prefHeight="1.0" prefWidth="200.0" style="-fx-background-color: #999999;" />
+            <HBox style="-fx-background-color: #ffff;">
+               <children>
+                  <Label fx:id="labelStatusText" text="Idli opened sucessfully ">
+                     <padding>
+                        <Insets bottom="2.0" left="4.0" top="2.0" />
+                     </padding>
+                  </Label>
+               </children>
+            </HBox>
+         </children>
+      </VBox>
+   </bottom>
+</BorderPane>

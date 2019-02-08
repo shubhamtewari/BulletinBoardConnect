@@ -1,9 +1,12 @@
 package controllers;
 
+import core.CustomerStructure;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.*;
 import models.NoticeModel;
 
@@ -27,22 +30,36 @@ public class NoticeController implements Initializable {
     Label labelBodyText;
     @FXML
     Label labelAuthorText;
+    @FXML
+    ImageView imageViewImage;
+    @FXML
+    VBox vBoxNoticeText;
 
     public NoticeController(NoticeModel noticeModel) {
         this.noticeModel = noticeModel;
     }
 
-    void populateFields(String[] information) {
-        labelTitleText.setText(information[0]);
-        labelBodyText.setText(information[1]);
-        labelAuthorText.setText("@" +information[2].replace(" ", "").toLowerCase());
+    void populateFields() {
+        //noticeModel.createSimpleNotice(information[0],information[1],new CustomerStructure(information[2]));
+        labelTitleText.setText(noticeModel.getNoticeStructure().getNoticeTitle());
+        labelBodyText.setText(noticeModel.getNoticeStructure().getNoticeBody());
+        labelAuthorText.setText("@" +noticeModel.getNoticeStructure().getNoticeCustomer().getName().replace(" ", "").toLowerCase());
+        if(noticeModel.getNoticeStructure().getImagePath()==null){
+            vBoxNoticeText.getChildren().remove(1);
+        }
+        else {
+            imageViewImage.setFitWidth(340);
+            System.out.println(noticeModel.getNoticeStructure().getImagePath());
+            imageViewImage.setImage(new Image(noticeModel.getNoticeStructure().getImagePath()));
+            //imageViewImage.setImage(new Image(noticeModel.getNoticeStructure().getImagePath()));
+        }
     }
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        borderPane.setMaxWidth(300);
-        borderPane.setMinWidth(300);
-        borderPane.setPrefWidth(300);
+        borderPane.setMaxWidth(350);
+        borderPane.setMinWidth(350);
+        borderPane.setPrefWidth(350);
     }
 
     NoticeModel getNoticeModel() {

@@ -1,5 +1,6 @@
 package controllers;
 
+import core.CustomerStructure;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
@@ -53,35 +54,45 @@ public class PollController implements Initializable {
         this.pollModel = pollModel;
     }
 
-    void populateFields(String[] information) {
-        int infoLength = information.length;
-        questionText.setText(information[0]);
-        switch (infoLength) {
-            case 3:
-                labelPollOption1.setText(information[1]);
-                labelPollOption2.setText(information[2]);
-                vBoxPollText.getChildren().remove(2);
+    void populateFields() {
+
+        //pollModel.createPoll(information[0],options, new CustomerStructure("@anonymous"));
+
+        questionText.setText(pollModel.getPollStructure().getPollQuestion());
+        switch (pollModel.getPollStructure().getNumberOfOptions()) {
+            case 2:
+                labelPollOption1.setText(pollModel.getPollStructure().getPollOptions()[0]);
+                labelPollOption2.setText(pollModel.getPollStructure().getPollOptions()[1]);
                 vBoxPollText.getChildren().remove(3);
+                vBoxPollText.getChildren().remove(3);
+                //vBoxPollText.getChildren().remove(3);
+                //hBox3.setVisible(false);
+                //hBox4.setVisible(false);
                 region3.setVisible(false);
                 region4.setVisible(false);
                 break;
-            case 4:
-                labelPollOption1.setText(information[1]);
-                labelPollOption2.setText(information[2]);
-                labelPollOption3.setText(information[3]);
-                hBox4.setVisible(false);
+            case 3:
+                labelPollOption1.setText(pollModel.getPollStructure().getPollOptions()[0]);
+                labelPollOption2.setText(pollModel.getPollStructure().getPollOptions()[1]);
+                labelPollOption3.setText(pollModel.getPollStructure().getPollOptions()[2]);
+                vBoxPollText.getChildren().remove(4);
+                //hBox4.setVisible(false);
                 region4.setVisible(false);
                 break;
-            case 5:
-                labelPollOption1.setText(information[1]);
-                labelPollOption2.setText(information[2]);
-                labelPollOption3.setText(information[3]);
-                labelPollOption4.setText(information[4]);
+            case 4:
+                labelPollOption1.setText(pollModel.getPollStructure().getPollOptions()[0]);
+                labelPollOption2.setText(pollModel.getPollStructure().getPollOptions()[1]);
+                labelPollOption3.setText(pollModel.getPollStructure().getPollOptions()[2]);
+                labelPollOption4.setText(pollModel.getPollStructure().getPollOptions()[3]);
                 break;
         }
     }
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+    }
+
+    public PollModel getPollModel() {
+        return pollModel;
     }
 }

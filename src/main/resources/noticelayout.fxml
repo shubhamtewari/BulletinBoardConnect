@@ -4,6 +4,7 @@
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.effect.DropShadow?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.Region?>
@@ -20,14 +21,14 @@
       </HBox>
    </top>
    <bottom>
-      <Button fx:id="closeButton" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false"  opacity="0.75" style="-fx-background-color: #ff0000; -fx-text-fill: #ffffffff; -fx-background-radius: 15; -fx-border-radius: 15;" text="X" textAlignment="CENTER" BorderPane.alignment="CENTER">
+      <Button fx:id="closeButton" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" opacity="0.75" style="-fx-background-color: #ff0000; -fx-text-fill: #ffffffff; -fx-background-radius: 15; -fx-border-radius: 15;" text="X" textAlignment="CENTER" BorderPane.alignment="CENTER">
          <BorderPane.margin>
             <Insets bottom="6.0" />
          </BorderPane.margin>
       </Button>
    </bottom>
    <center>
-      <VBox fx:id="noticeText" minHeight="100.0" BorderPane.alignment="CENTER">
+      <VBox fx:id="vBoxNoticeText" minHeight="100.0" BorderPane.alignment="CENTER">
          <children>
             <Label fx:id="labelTitleText" text="&lt;title&gt;">
                <font>
@@ -36,6 +37,7 @@
                <padding>
                   <Insets bottom="8.0" />
                </padding></Label>
+            <ImageView fx:id="imageViewImage" fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" />
             <Label fx:id="labelBodyText" text="&lt;body&gt;" textAlignment="JUSTIFY" />
             <Label fx:id="labelAuthorText" text="&lt;author&gt;" textFill="#979191">
                <font>

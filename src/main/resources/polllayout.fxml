@@ -30,7 +30,8 @@
                </font>
                <padding>
                   <Insets bottom="8.0" />
-               </padding></Label>
+               </padding>
+            </Label>
             <HBox fx:id="hBox1" alignment="CENTER_LEFT" spacing="8.0">
                <children>
                   <Region maxHeight="30.0" maxWidth="30.0" minHeight="30.0" minWidth="30.0" style="-fx-background-color: #39ff14;" />

@@ -1,223 +1,182 @@
 package controllers;
 
-import api.OpenWeatherMapJSONDataRetriever;
+import core.BoardStructure;
 import core.CustomerStructure;
-import javafx.event.ActionEvent;
+import core.NoticeStructure;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.geometry.Insets;
 import javafx.geometry.Orientation;
+import javafx.geometry.Pos;
 import javafx.scene.Scene;
-import javafx.scene.control.Alert;
-import javafx.scene.control.MenuItem;
-import javafx.scene.layout.*;
-import javafx.stage.FileChooser;
+import javafx.scene.control.Button;
+import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
+import javafx.scene.layout.FlowPane;
+import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
-import java.io.*;
-import java.net.URL;
-import java.time.LocalTime;
-import java.util.ArrayList;
-import java.util.ResourceBundle;
-
 import models.BoardModel;
 import models.NoticeModel;
 import models.PollModel;
 
+import java.io.IOException;
+import java.net.URL;
+import java.util.ArrayList;
+import java.util.ResourceBundle;
+
 public class BoardController implements Initializable {
+    private BoardModel boardModel;
 
-    private BoardModel boardModel;//the model
-    //private NoticeInputWindowController noticeInputWindowController;//window to input notice data
-    //private PollInputWindowController pollInputWindowController;//window to input poll data
-    private int iterator;//for iterating through fxml loaders for poll and notices
+    private FXMLLoader fxmlLoaderNotice;
+    private FXMLLoader fxmlLoaderPoll;
 
-    private FXMLLoader fxmlLoaderNoticeWindow;//the high priority notice window
+    private ArrayList<NoticeController> arrayListNoticeControllers;
+    private ArrayList<PollController> arrayListPollControllers;
 
-    private int combinedNoticeWidth;//the total width of all the notices
-    private File fileCurrentFocused;//the board file that is currently being worked on
-
-    private ArrayList<FXMLLoader> fxmlLoaderArrayList;//storing fxml loaders
-
-    //constructor
     public BoardController(BoardModel boardModel) {
         this.boardModel = boardModel;
-        fxmlLoaderArrayList = new ArrayList<>();
-        combinedNoticeWidth = 20;//the padding initial
+        fxmlLoaderNotice = new FXMLLoader(getClass().getResource("/noticelayout.fxml"));
+        fxmlLoaderPoll = new FXMLLoader(getClass().getResource("/polllayout.fxml"));
+        arrayListNoticeControllers = new ArrayList<>();
+        arrayListPollControllers = new ArrayList<>();
     }
 
     @FXML
-    FlowPane flowPaneNotices;
-    @FXML
-    BorderPane borderPane;
-    @FXML
-    MenuItem menuItemLoad;
-    @FXML
-    HBox hBoxWidgetBar;
+    FlowPane flowPane;
 
-    //ESSENTIAL METHODS>>>>>>>>>>>>>>
-    String getWeatherData(api.WeatherDataRetriever weatherDataRetriever, String string)throws Exception {
-        return weatherDataRetriever.setupConn(string).toString();
-    }
-    //<<<<<<<<<<<<<<<ESSENTIAL METHODS END
+    //board helper methods>>>>
+    //insert related methods>>>>
 
-    //insert menu options MVC listeners begin>>>>>>>>>>>>>>>>>>>
-    @FXML
-    void onInsertTextNotice() {
-        //if flow pane is full
-        if(combinedNoticeWidth+300>flowPaneNotices.getWidth()) {
-            Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.setHeaderText("Overflow");
-            alert.setContentText("Board Full!! Your notice is in Queue.");
-            alert.showAndWait();
-            return;
+    /**
+     * this function makes the notice and loads in on to the board
+     * @param noticeModel all the information about the notice is stored here
+     */
+    void insertNotice(NoticeModel noticeModel) throws IOException{
+        try{
+            fxmlLoaderNotice.setControllerFactory(e -> new NoticeController(noticeModel));
+
+            flowPane.getChildren().add(fxmlLoaderNotice.load());
+            arrayListNoticeControllers.add(fxmlLoaderNotice.getController());
+
+            arrayListNoticeControllers.get(arrayListNoticeControllers.size()-1).populateFields();
+
+            boardModel.addNoticeToBoard(false, noticeModel.getNoticeStructure());
+        }catch (Exception e) {
+            throw e;
+        }finally {
+            //for reuse of the fxml loader
+            fxmlLoaderNotice.setController(null);
+            fxmlLoaderNotice.setRoot(null);
         }
 
-        //create and show notice input window and wait
+    }
+
+    /**
+     * this will add the notice to the board
+     */
+    void insertTextNotice() throws IOException{
+        //get input to display on notice
         NoticeInputWindowController noticeInputWindowController = new NoticeInputWindowController();
         noticeInputWindowController.initNoticeInputWindow();
         noticeInputWindowController.showWindowAndWait();
 
         //if noticeInputWindowController.buttonInsertNotice pressed
         if(noticeInputWindowController.isShowNotice()) {
-            //create notice and display
-            fxmlLoaderArrayList.add(new FXMLLoader(getClass().getResource("/noticelayout.fxml")));
-            fxmlLoaderArrayList.get(iterator).setControllerFactory(param -> new NoticeController(new NoticeModel()));
-            try {
-                flowPaneNotices.getChildren().add(fxmlLoaderArrayList.get(iterator).load());
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
+            String info[] = noticeInputWindowController.getArrayNoticeInformation();
 
-            NoticeController noticeController = fxmlLoaderArrayList.get(iterator).getController();
-            noticeController.populateFields(noticeInputWindowController.getArrayNoticeInformation());
+            NoticeModel noticeModel = new NoticeModel(info[0], info[1], new CustomerStructure(info[2]));
 
-            iterator++;
-
-            combinedNoticeWidth += 300 + 10;
-            //System.out.println(flowPaneNotices.getWidth() + "=" + combinedNoticeWidth);
+            insertNotice(noticeModel);
         }
     }
 
-    @FXML
-    void onInsertImageNotice() {
+    void insertImageNotice() throws IOException{
+        ImageNoticeInputWindowController imageNoticeInputWindowController = new ImageNoticeInputWindowController();
+        imageNoticeInputWindowController.show();
+        if(imageNoticeInputWindowController.validClose) {
+            String info[] = imageNoticeInputWindowController.getInformation();
 
+            NoticeModel noticeModel = new NoticeModel(info[0], info[1], info[3], new CustomerStructure(info[2]));
+
+            insertNotice(noticeModel);
+        }
     }
 
-    @FXML
-    void onInsertPoll() throws IOException{
+    void insertPoll() throws IOException{
         PollInputWindowController pollInputWindowController = new PollInputWindowController();
         pollInputWindowController.initPollInputDataWindow();
         pollInputWindowController.showStageAndWait();
 
         //on poll entries added and buttonInsertPoll clicked
         if(pollInputWindowController.isShowPoll()) {
-            fxmlLoaderArrayList.add(new FXMLLoader(getClass().getResource("/polllayout.fxml")));
-            fxmlLoaderArrayList.get(iterator).setControllerFactory(event -> new PollController(new PollModel()));
-            flowPaneNotices.getChildren().add(fxmlLoaderArrayList.get(iterator).load());
-            PollController pollController = fxmlLoaderArrayList.get(iterator).getController();
-            pollController.populateFields(pollInputWindowController.pollInformation);//add data from the poll input window input
+            String pollInfo[] = pollInputWindowController.pollInformation;
 
-            //for next notice/poll
-            iterator++;
-        }
+            //the options
+            String options[] = new String[pollInfo.length - 1];
+            for(int i = 1;i<pollInfo.length;i++)
+                options[i-1] = pollInfo[i];
 
-    }
+            PollModel pollModel = new PollModel(pollInfo[0],options,new CustomerStructure("@anonymous"));
+            fxmlLoaderPoll.setControllerFactory(event -> new PollController(pollModel));
 
-    @FXML
-    void onInsertHighPriorityNotice() {
-        fxmlLoaderNoticeWindow = new FXMLLoader(getClass().getResource("/highprioritynotice.fxml"));
-        Stage stageHighPriorityNoticeWindow = new Stage();
-        try {
-            stageHighPriorityNoticeWindow.setScene(new Scene(fxmlLoaderNoticeWindow.load()));
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        stageHighPriorityNoticeWindow.show();
-    }
 
-    public void OnAddTimeDateDayWidget(ActionEvent actionEvent) throws IOException {
-        FXMLLoader fxmlLoaderTimeDateDay = new FXMLLoader(getClass().getResource("/datewidgetlayout.fxml"));
-        hBoxWidgetBar.getChildren().add(fxmlLoaderTimeDateDay.load());
-    }
+            flowPane.getChildren().add(fxmlLoaderPoll.load());
+            arrayListPollControllers.add(fxmlLoaderPoll.getController());
+            arrayListPollControllers.get(arrayListPollControllers.size()-1).populateFields();//add data from the poll input window input
 
-    @FXML
-    void OnAddWeatherWidget() {
-        WeatherInputStageController weatherInputStageController = new WeatherInputStageController();
-        weatherInputStageController.setUpUI();
-        try {
-            System.out.println(getWeatherData(new OpenWeatherMapJSONDataRetriever(), weatherInputStageController.information));
-        }catch (Exception e) {
-            System.out.println("Wrong Input!!");
-            //e.printStackTrace();
+            boardModel.addPollToBoard(false, pollModel.getPollStructure());
         }
     }
-    //insert menu options MVC listeners end<<<<<<<<<<<<<<<<<<<<<<<<
+    //insert related methods end<<<<
 
-    //file menu option MVC listeners begin>>>>>>>>>>>>>>>>>>>>>>>>>.
-    @FXML
-    void onSaveAsBoard() throws IOException {
-        CustomerStructure customerStructure = new CustomerStructure("hey");
-        customerStructure.setAdministrator(true);
+    void populateBoardFromBoardObject(BoardStructure boardStructure) throws IOException{
+        Stage stage = (Stage)flowPane.getScene().getWindow();
+        stage.setTitle("I.D.L.I v0.0.1 (Inter Departmental Linked Interface) - "+boardStructure.getBoardName());
+        for(NoticeStructure n : boardStructure.getPresentNoticeStructures()) {
+            NoticeModel noticeModel = new NoticeModel(n.getNoticeTitle(),n.getNoticeBody(),new CustomerStructure(n.getNoticeCustomer().getName()));
+            fxmlLoaderNotice.setControllerFactory(e -> new NoticeController(noticeModel));
 
-        FileChooser fileChooser = new FileChooser();
-        fileCurrentFocused = fileChooser.showSaveDialog(null);
-        FileOutputStream fileOutputStream = new FileOutputStream(fileCurrentFocused);
-        ObjectOutputStream objectOutputStream = new ObjectOutputStream(fileOutputStream);;
-        try {
-            objectOutputStream.writeObject(customerStructure);
-        }catch (IOException e) { } finally {
-            objectOutputStream.close();
-            fileOutputStream.close();
+            flowPane.getChildren().add(fxmlLoaderNotice.load());
+            arrayListNoticeControllers.add(fxmlLoaderNotice.getController());
+            arrayListNoticeControllers.get(arrayListNoticeControllers.size()-1).populateFields();
+
+            boardModel.addNoticeToBoard(false,noticeModel.getNoticeStructure());
+
+            fxmlLoaderNotice.setController(null);
+            fxmlLoaderNotice.setRoot(null);
         }
-        menuItemLoad.setDisable(false);
-        System.out.println(fileCurrentFocused.getAbsolutePath());
+    }
+    //board helper methods end<<<<
+
+    //getter and setters>>>>
+    public BoardModel getBoardModel() {
+        return boardModel;
     }
 
-    @FXML
-    void onSaveBoard() throws IOException {
-        CustomerStructure customerStructure = new CustomerStructure("test");
-        FileOutputStream fileOutputStream = new FileOutputStream(fileCurrentFocused);
-        ObjectOutputStream objectOutputStream = new ObjectOutputStream(fileOutputStream);;
-        try {
-            objectOutputStream.writeObject(customerStructure);
-        }catch (IOException e) { } finally {
-            objectOutputStream.close();
-            fileOutputStream.close();
-        }
-        System.out.println(fileCurrentFocused.getAbsolutePath());
-
+    public FXMLLoader getFxmlLoaderNotice() {
+        return fxmlLoaderNotice;
     }
 
-    @FXML
-    void onLoadBoard() {
-        FileChooser fileChooser = new FileChooser();
-        File selectedFile = fileChooser.showOpenDialog(null);
-        System.out.println(selectedFile.getAbsolutePath());
+    public FXMLLoader getFxmlLoaderPoll() {
+        return fxmlLoaderPoll;
     }
 
-    @FXML
-    void onClose() {
-        Stage stage = (Stage)borderPane.getScene().getWindow();
-        stage.close();
+    public ArrayList<NoticeController> getArrayListNoticeControllers() {
+        return arrayListNoticeControllers;
     }
-    //file menu MVC listeners end<<<<<<<<<<<<<<<<<<<
 
+    public ArrayList<PollController> getArrayListPollControllers() {
+        return arrayListPollControllers;
+    }
+    //getters and setters end<<<<
 
+    //initialize
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        //flow pane
-        flowPaneNotices = new FlowPane();
-        flowPaneNotices.setOrientation(Orientation.VERTICAL);
-        flowPaneNotices.setHgap(10);
-        flowPaneNotices.setVgap(10);
-        flowPaneNotices.setPadding(new Insets(10));
+        flowPane.setAlignment(Pos.TOP_LEFT);
+        flowPane.setOrientation(Orientation.VERTICAL);
 
-        //menu items/file menu
-        menuItemLoad.setDisable(true);
-
-        //set flow pane as center
-        borderPane.setCenter(flowPaneNotices);
     }
-
 }
-
