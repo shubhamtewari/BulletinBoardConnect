@@ -31,6 +31,7 @@ public class ConnectDialogController {
 
     public boolean isConnectionEstablished;
     public boolean wasDuplicateConnection;
+    boolean validClose;
 
     DatabaseConnectable databaseConnection;
 
@@ -40,7 +41,8 @@ public class ConnectDialogController {
             databaseConnection.setupConnection(isBoardOnline, path);
         } catch (DuplicateConnectionToDatabaseException e) {
             wasDuplicateConnection = true;
-            return false;
+            System.out.println("duplicate");
+            return true;
         } catch (IOException i) {
             throw i;
         } catch (Exception e) {
@@ -54,6 +56,7 @@ public class ConnectDialogController {
 
     public ConnectDialogController(DatabaseConnectable databaseConnection, boolean connectDialogIsBoardOnline){
             clickTag = -1;
+            validClose = false;
             vBox = new VBox();
             buttonChooseKey = new Button("Choose Private Key");
             buttonUsePreviousPath = new Button("Use Previous Path");
@@ -87,6 +90,7 @@ public class ConnectDialogController {
         }
 
         void setupListeners () {
+            //to open via private key, opening it
             buttonChooseKey.setOnMouseClicked(e -> {
                 FileWriter fileWriter = null;
                 File filePrivateKey;
@@ -113,7 +117,7 @@ public class ConnectDialogController {
                     }
                 }
 
-                //conenct to the database
+                //connect to the database
                 boolean b = false;
                 try {
                     b = connectToDatabase(databaseConnection, connectDialogIsBoardOnline, path);
@@ -124,12 +128,16 @@ public class ConnectDialogController {
                 if (b) {
                     connectDialogIsBoardOnline = true;
                     isConnectionEstablished = true;
+                    validClose = true;
                     stage.close();
                 }if(wasDuplicateConnection) {
+                    connectDialogIsBoardOnline = true;
+                    validClose = true;
                     stage.close();
                 }
             });
 
+            //to open using saved path
             buttonUsePreviousPath.setOnMouseClicked(e -> {
                 String path;
                 boolean b = false;
@@ -138,6 +146,7 @@ public class ConnectDialogController {
                     path = bufferedReader.readLine();
                     //conenct to the database
                     b = connectToDatabase(databaseConnection, connectDialogIsBoardOnline, path);
+                    System.out.println(b);
                 } catch (FileNotFoundException e1) {
                     System.out.println("No path in history. Please choose private key:(");
                     e1.printStackTrace();
@@ -152,8 +161,11 @@ public class ConnectDialogController {
                 if (b) {
                     connectDialogIsBoardOnline = true;
                     isConnectionEstablished = true;
+                    validClose = true;
                     stage.close();
                 }if(wasDuplicateConnection) {
+                    connectDialogIsBoardOnline = true;
+                    validClose = true;
                     stage.close();
                 }
             });

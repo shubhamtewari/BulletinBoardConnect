@@ -8,4 +8,13 @@ public interface DatabaseConnectable {
      * @throws Exception a general exception
      */
     boolean setupConnection(boolean flag, String path)throws Exception;
+
+    /**
+     * disconnect from the database
+     * dont require board online flags
+     * will use exceptions instead
+     * @return true/false
+     */
+    boolean disconnectDatabase();
+
 }

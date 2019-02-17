@@ -4,26 +4,25 @@ import api.*;
 import core.*;
 import database.FirebaseDatabaseConnectable;
 import database.FirebaseDatabaseManipulator;
-import exceptions.DuplicateConnectionToDatabaseException;
+import javafx.application.Platform;
+import javafx.concurrent.Task;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
+import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.MenuItem;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.layout.*;
-import javafx.scene.paint.Paint;
-import javafx.scene.text.Font;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 
 import java.io.*;
+import java.net.MalformedURLException;
 import java.net.URL;
+import java.net.URLConnection;
 import java.time.LocalDate;
 import java.util.ResourceBundle;
 import java.util.concurrent.atomic.AtomicBoolean;
@@ -96,11 +95,20 @@ public class BulletinBoxController implements Initializable {
     @FXML
     MenuItem menuItemUpload;
     @FXML
+    MenuItem menuItemInsertEvent;
+    @FXML
     Label labelConnectionStatus;
     @FXML
     Label labelStatusText;
     @FXML
     Region regionConnectionStatus;
+    @FXML
+    MenuItem menuItemAddHPP;
+    @FXML
+    MenuItem menuItemShowHPP;
+    @FXML
+    MenuItem menuItemShow;
+
     //fxml declaration end<<<<
 
     //methods>>>>
@@ -114,8 +122,9 @@ public class BulletinBoxController implements Initializable {
         //menuItemWidget.setDisable(b);
         menuItemDelete.setDisable(b);
         menuItemClear.setDisable(b);
-        menuItemSort.setDisable(b);
+        //menuItemSort.setDisable(b);
         menuItemClose.setDisable(b);
+        menuItemInsertEvent.setDisable(b);
     }
 
     /**
@@ -217,7 +226,7 @@ public class BulletinBoxController implements Initializable {
     void onInsertTextNotice() {
         try {
             boardController.insertTextNotice();
-        }catch (IOException e) {
+        }catch (Exception e) {
             System.out.println("Could not insert text notice:(");
             e.printStackTrace();
         }
@@ -227,7 +236,7 @@ public class BulletinBoxController implements Initializable {
     void onInsertImageNotice() {
         try {
             boardController.insertImageNotice();
-        }catch (IOException e) {
+        }catch (Exception e) {
             System.out.println("Could not insert image notice:(");
             e.printStackTrace();
         }
@@ -239,6 +248,17 @@ public class BulletinBoxController implements Initializable {
             boardController.insertPoll();
         }catch (Exception e) {
             System.out.println("Failed to insert poll:(");
+            e.printStackTrace();
+            return;
+        }
+    }
+
+    @FXML
+    void onInsertEvent() {
+        try {
+            boardController.insertEvent();
+        }catch (Exception e) {
+            labelStatusText.setText("Failed to insert event:(");
             e.printStackTrace();
             return;
         }
@@ -323,16 +343,28 @@ public class BulletinBoxController implements Initializable {
             stage.setTitle("I.D.L.I v0.0.1 (Inter Departmental Linked Interface) - "+string);
             //load the board
             fxmlLoaderBoard.setControllerFactory(e -> new BoardController(new BoardModel(string)));
-            FlowPane flowPane = (FlowPane) fxmlLoaderBoard.load();
-            borderPane.setCenter(flowPane);
+            Parent root = (AnchorPane) fxmlLoaderBoard.load();
+            borderPane.setCenter(root);
+
             boardController = fxmlLoaderBoard.getController();
+            //boardController = null;
+            fxmlLoaderBoard.setController(null);
+            fxmlLoaderBoard.setRoot(null);
+
+            //boardController.hBoxBoard.setPadding(new Insets(40));
+            System.out.println(boardController.anchorPane.getWidth());
+            boardController.hBoxBoard.setMinWidth(boardController.anchorPane.getPrefWidth());
+            boardController.hBoxBoard.setMinHeight(boardController.anchorPane.getHeight());
+
             labelStatusText.setText("Board opened: "+boardController.getBoardModel().getBoardStructure().getBoardName());
         }catch (NullPointerException n){
             labelStatusText.setText("The string was null:(");
             n.printStackTrace();
+            return;
         }catch (IOException i) {
             labelStatusText.setText("Error on loading of board:(");
             i.printStackTrace();
+            return;
         }
         isboardAlive = true;
         //enable the views required now
@@ -351,7 +383,7 @@ public class BulletinBoxController implements Initializable {
             return;
         }
         labelStatusText.setText("Board saved as successfully:) : "+boardController.getBoardModel().getBoardStructure().getBoardName());
-        menuItemLoad.setDisable(false);
+        //menuItemLoad.setDisable(false);
     }
 
     @FXML
@@ -379,12 +411,16 @@ public class BulletinBoxController implements Initializable {
                 closeBoard();
             }
 
-            fxmlLoaderBoard.setControllerFactory(e -> new BoardController(new BoardModel(boardStructure.getBoardName())));
-
-            borderPane.setCenter(fxmlLoaderBoard.load());
+            fxmlLoaderBoard.setControllerFactory(e -> new BoardController(new BoardModel(boardStructure)));
+            Parent root = (AnchorPane)fxmlLoaderBoard.load();
+            borderPane.setCenter(root);
 
             boardController = fxmlLoaderBoard.getController();
 
+            boardController.hBoxBoard.setPrefWidth(boardController.anchorPane.getPrefWidth());
+            boardController.hBoxBoard.setPrefHeight(boardController.anchorPane.getPrefHeight());
+
+            System.out.println(boardStructure.getPresentNoticeStructures().get(0).getNoticeBody());
             boardController.populateBoardFromBoardObject(boardStructure);
             isboardAlive = true;
         }catch (Exception e) {
@@ -420,20 +456,57 @@ public class BulletinBoxController implements Initializable {
     //connect menu MVC liteners start>>>>>>>>>>>>>>>>>
     @FXML
     void onConnect() {
-        ConnectDialogController connectDialogController = new ConnectDialogController((FirebaseDatabaseConnectable) databaseConnection, isBoardOnline);
+        ConnectDialogController connectDialogController = new ConnectDialogController(databaseConnection, isBoardOnline);
 
-        if(connectDialogController.isConnectionEstablished) {
-            labelStatusText.setText("Connection with database established sucessfully, Board Online:)");
-            isBoardOnline = true;
-            labelConnectionStatus.setText("*connected to workspace1*");
-            regionConnectionStatus.setStyle("-fx-background-color:#00b300");
-            setDisableConnectViews(false);
-        }
-        else if(connectDialogController.wasDuplicateConnection) {
-            labelStatusText.setText("Already Connected:|");
-        }
+        if(!connectDialogController.validClose)
+            return;
+
+        labelStatusText.setText("Connecting to database, please wait:|");
+        regionConnectionStatus.setStyle("-fx-background-color:#CCCC00");
+        labelConnectionStatus.setText("*connecting*");
+        Task ti = new Task<Void>() {
+            @Override
+            protected Void call() throws Exception {
+                try {
+                    URL url = new URL("https://ghurdauriconnect.firebaseio.com");
+                    URLConnection urlConnection = url.openConnection();
+                    urlConnection.connect();
+                } catch (MalformedURLException e) {
+                    connectDialogController.isConnectionEstablished = false;
+                    e.printStackTrace();
+                } catch (Exception e1) {
+                    e1.printStackTrace();
+                    connectDialogController.isConnectionEstablished = false;
+                }
+                Platform.runLater(() -> {
+                    regionConnectionStatus.setStyle("-fx-background-color: #ff1919");
+                    labelConnectionStatus.setText("*offline*");
+                    if(connectDialogController.wasDuplicateConnection) {
+                        labelStatusText.setText("Already connected:|");
+                        labelConnectionStatus.setText("*connected to workspace1*");
+                        regionConnectionStatus.setStyle("-fx-background-color:#00b300");
+                    }
+                    else if(connectDialogController.isConnectionEstablished) {
+                        labelStatusText.setText("Connection established successfully, workspace online:)");
+                        isBoardOnline = true;
+                        labelConnectionStatus.setText("*connected to workspace1*");
+                        regionConnectionStatus.setStyle("-fx-background-color:#00b300");
+                        setDisableConnectViews(false);
+                    } else if(connectDialogController.wasDuplicateConnection) {
+                          labelStatusText.setText("Already connected:|");
+                          labelConnectionStatus.setText("*connected to workspace1*");
+                          regionConnectionStatus.setStyle("-fx-background-color:#00b300");
+                    } else if(!connectDialogController.isConnectionEstablished) {
+                          labelStatusText.setText("Connection failed, check your internet connection:(");
+                    }
+                });
+                return null;
+            }
+        };
+        Thread thread = new Thread(ti);
+        thread.setDaemon(true);
+        thread.start();
     }
-
     @FXML
     void onUpload() {
         try {
@@ -445,8 +518,32 @@ public class BulletinBoxController implements Initializable {
         }
         labelStatusText.setText("Sucessfully uploaded board:)");
     }
+    @FXML
+    void onDisconnect() {
+        boolean successful = databaseConnection.disconnectDatabase();
+        if(!successful) {
+            labelStatusText.setText("Already disconnected:|");
+        }
+        else {
+            labelStatusText.setText("Successfully disconnected:)");
+            isBoardOnline = false;
+        }
+        labelConnectionStatus.setText("*offline*");
+        regionConnectionStatus.setStyle("-fx-background-color:#ff1919");
+    }
     //file menu MVC listeners end<<<<<<<<<<<<<<<<<<<<<<
 
+    //shorcuts>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+    @FXML
+    void onInsertHPPShortcut() {
+        onInsertHighPriorityNotice();
+    }
+
+    @FXML
+    void onShowHPPShortcut() {
+
+    }
+    //shortcuts<<<<<<<<<<<<<<<<<<<<<<<<<<<
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         //if no board open
@@ -458,8 +555,9 @@ public class BulletinBoxController implements Initializable {
             setDisableConnectViews(true);
         }
 
+        vBoxInitial.setAlignment(Pos.CENTER);
+        vBoxInitial.getChildren().addAll(labelLineOneInitial);
         borderPane.setCenter(vBoxInitial);
-
     }
 
     //getters and setters>>>>

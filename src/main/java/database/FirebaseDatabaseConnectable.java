@@ -15,14 +15,31 @@ public class FirebaseDatabaseConnectable implements DatabaseConnectable{
         if(isBoardOnline) {
             throw new DuplicateConnectionToDatabaseException();
         }
-        FileInputStream serviceAccount =
-                new FileInputStream(path);
-        FirebaseOptions options = new FirebaseOptions.Builder()
-                .setCredentials(GoogleCredentials.fromStream(serviceAccount))
-                .setDatabaseUrl("https://ghurdauriconnect.firebaseio.com")
-                .build();
+        else {
+            try {
+                FileInputStream serviceAccount =
+                        new FileInputStream(path);
+                FirebaseOptions options = new FirebaseOptions.Builder()
+                        .setCredentials(GoogleCredentials.fromStream(serviceAccount))
+                        .setDatabaseUrl("https://ghurdauriconnect.firebaseio.com")
+                        .build();
 
-        FirebaseApp.initializeApp(options);
+                FirebaseApp.initializeApp(options);
+            } catch (IllegalStateException e) {
+                FirebaseApp.getInstance().delete();
+                setupConnection(isBoardOnline, path);
+            }
+        }
+        return true;
+    }
+
+    @Override
+    public boolean disconnectDatabase() {
+        try {
+            FirebaseApp.getInstance().delete();
+        } catch (IllegalStateException e) {
+            return false;
+        }
         return true;
     }
 }

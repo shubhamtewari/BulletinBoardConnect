@@ -1,7 +1,9 @@
 import controllers.BulletinBoxController;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
+import javafx.geometry.Rectangle2D;
 import javafx.scene.Scene;
+import javafx.stage.Screen;
 import javafx.stage.Stage;
 import models.BulletinBoxModel;
 
@@ -10,8 +12,13 @@ public class Main extends Application {
     @Override
     public void start(Stage primaryStage) throws Exception{
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/bulletinboxlayout.fxml"));
-        primaryStage.setHeight(700);
-        primaryStage.setWidth(1050);
+        //get size of screen
+        Rectangle2D rectangle2D = Screen.getPrimary().getVisualBounds();
+        //set stage to screen size
+        primaryStage.setHeight(rectangle2D.getHeight());
+        primaryStage.setWidth(rectangle2D.getWidth());
+        //resisable false
+        primaryStage.setResizable(false);
 
         loader.setControllerFactory(s -> new BulletinBoxController(new BulletinBoxModel()));
 

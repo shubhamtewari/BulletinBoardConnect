@@ -1,1 +1,0 @@
-{"boardTimeStamp":1548914307219,"boardDate":"2019-01-31","boardName":"test model","presentNoticeStructures":[],"queuedNoticeStructures":[],"presentPollStructures":[],"queuedPollStructures":[]}

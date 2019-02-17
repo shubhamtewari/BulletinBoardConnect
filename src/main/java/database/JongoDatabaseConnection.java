@@ -28,4 +28,9 @@ public class JongoDatabaseConnection implements DatabaseConnectable {
         */
         return false;
     }
+
+    @Override
+    public boolean disconnectDatabase() {
+        return false;
+    }
 }

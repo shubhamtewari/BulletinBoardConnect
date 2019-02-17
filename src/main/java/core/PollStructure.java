@@ -1,15 +1,18 @@
 package core;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+
 public class PollStructure implements Pinnable {
     private long pollTimeStamp;
     private String pollDate;
     private String pollQuestion;
     private int numberOfOptions;
-    private String pollOptions[];
-    private int pollOptionsVote[];
+    private ArrayList<String> pollOptions;
+    private ArrayList<Integer> pollOptionsVote;
     private CustomerStructure Customer;
 
-    public PollStructure(long pollTimeStamp, String pollDate, String pollQuestion, int numberOfOptions, String pollOptions[], int pollOptionsVote[], CustomerStructure customer) {
+    public PollStructure(long pollTimeStamp, String pollDate, String pollQuestion, int numberOfOptions, ArrayList<String> pollOptions, ArrayList<Integer> pollOptionsVote, CustomerStructure customer) {
         this.pollTimeStamp = pollTimeStamp;
         this.pollDate = pollDate;
         this.pollQuestion = pollQuestion;
@@ -39,19 +42,19 @@ public class PollStructure implements Pinnable {
         return numberOfOptions;
     }
 
-    public String[] getPollOptions() {
+    public ArrayList<String> getPollOptions() {
         return pollOptions;
     }
 
-    public void setPollOptions(String[] pollOptions) {
+    public void setPollOptions(ArrayList<String> pollOptions) {
         this.pollOptions = pollOptions;
     }
 
-    public int[] getPollOptionsVote() {
+    public ArrayList<Integer> getPollOptionsVote() {
         return pollOptionsVote;
     }
 
-    public void setPollOptionsVote(int[] pollOptionsVote) {
+    public void setPollOptionsVote(ArrayList<Integer> pollOptionsVote) {
         this.pollOptionsVote = pollOptionsVote;
     }
 

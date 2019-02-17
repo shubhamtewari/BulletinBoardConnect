@@ -5,6 +5,8 @@ package core;
  * @author shbmtewari@gmail.com
  */
 public class NoticeStructure implements Pinnable{
+    static int count = 0;
+    private int noticeId;
     private long noticeTimeStamp;
     private String noticeDate;
     private String noticeTitle;
@@ -15,6 +17,7 @@ public class NoticeStructure implements Pinnable{
     private CustomerStructure noticeCustomer;
 
     public NoticeStructure(long noticeTimeStamp, String noticeDate, String noticeTitle, String noticeBody, String imagePath,int positiveVotes, int negativeVotes, CustomerStructure noticeCustomer) {
+        noticeId = ++count;
         this.noticeTimeStamp = noticeTimeStamp;
         this.noticeDate = noticeDate;
         this.noticeTitle = noticeTitle;
@@ -87,5 +90,13 @@ public class NoticeStructure implements Pinnable{
 
     public void setImagePath(String imagePath) {
         this.imagePath = imagePath;
+    }
+
+    public static int getCount() {
+        return count;
+    }
+
+    public int getNoticeId() {
+        return noticeId;
     }
 }

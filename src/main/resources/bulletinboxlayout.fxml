@@ -4,6 +4,7 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.Menu?>
 <?import javafx.scene.control.MenuBar?>
+<?import javafx.scene.control.MenuButton?>
 <?import javafx.scene.control.MenuItem?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.HBox?>
@@ -21,39 +22,32 @@
                     <MenuItem onAction="#onLoadBoard" text="Load..." />
                     <MenuItem fx:id="menuItemSave" onAction="#onSaveBoard" text="Save" />
                     <MenuItem onAction="#onSaveAsBoard" text="Save As..." />
-                    <MenuItem text="Settings" />
                     <MenuItem fx:id="menuItemClose" onAction="#onClose" text="Close" />
                     <MenuItem onAction="#onQuit" text="Quit" />
                 </Menu>
-                  <Menu fx:id="menuItemWorkspace" text="Workspace">
-                      <MenuItem fx:id="m" text="Workspace" />
-                  </Menu>
-                <Menu text="Edit">
+
+                  <Menu text="Edit">
                     <Menu text="Insert">
                         <Menu fx:id="menuItemInsertNotice" text="Notice">
                             <MenuItem fx:id="insertTextNotice" onAction="#onInsertTextNotice" text="Text Notice" />
                             <MenuItem fx:id="insertImageNotice" onAction="#onInsertImageNotice" text="Image Notice" />
                         </Menu>
                         <MenuItem fx:id="menuItemInsertPoll" onAction="#onInsertPoll" text="Poll" />
-                        <Menu fx:id="menuItemWidget" text="Widget">
-                            <MenuItem onAction="#OnAddWeatherWidget" text="Weather Widget" />
-                            <MenuItem onAction="#OnAddTimeDateDayWidget" text="Time And Date Widget" />
-                        </Menu>
+                        <MenuItem fx:id="menuItemInsertEvent" onAction="#onInsertEvent" text="Event" />
                         <Menu text="Window">
                             <MenuItem onAction="#onInsertHighPriorityNotice" text="High Priority Notice" />
-                            <MenuItem text="Web Viewer" />
                         </Menu>
-                    </Menu>
-                    <Menu fx:id="menuItemSort" text="Sort">
-                        <MenuItem text="By Date" />
-                        <MenuItem text="By Priority" />
                     </Menu>
                     <MenuItem fx:id="menuItemDelete" text="Delete" />
                     <MenuItem fx:id="menuItemClear" text="Clear" />
                 </Menu>
+                  <Menu fx:id="menuDatabase" text="Database">
+                      <MenuItem fx:id="menuItemShow" text="Show..." />
+                  </Menu>
                   <Menu text="Connect">
                       <MenuItem fx:id="menuItemConnect" onAction="#onConnect" text="Connect..." />
                       <MenuItem fx:id="menuItemUpload" onAction="#onUpload" text="Upload" />
+                      <MenuItem fx:id="menuItemDisconnect" onAction="#onDisconnect" text="Disconnect" />
                   </Menu>
                 <Menu text="Help">
                     <MenuItem text="Conventions" />
@@ -61,7 +55,18 @@
                 </Menu>
               </menus>
             </MenuBar>
-             <HBox fx:id="hBoxWidgetBar" prefHeight="80.0" style="-fx-background-color: #ffffff;" />
+             <HBox fx:id="hBoxWidgetBar" alignment="CENTER_LEFT" minHeight="30.0" spacing="5.0" style="-fx-background-color: #ffffff;">
+               <children>
+                  <MenuButton fx:id="menuButtonHPP" alignment="CENTER" mnemonicParsing="false" popupSide="RIGHT" text="Admin Notice" textAlignment="CENTER">
+                    <items>
+                      <MenuItem fx:id="menuItemAddHPP" mnemonicParsing="false" onAction="#onInsertHPPShortcut" text="Add..." />
+                      <MenuItem fx:id="menuItemShowHPP" mnemonicParsing="false" onAction="#onShowHPPShortcut" text="Show" />
+                    </items>
+                  </MenuButton>
+               </children>
+               <padding>
+                  <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+               </padding></HBox>
             <Region fx:id="regionConnectionStatus" maxHeight="10.0" minHeight="1.0" prefHeight="1.0" style="-fx-background-color: #ff1919;" />
             <Label fx:id="labelConnectionStatus" text="*offline*" textAlignment="CENTER" textFill="#837d7d">
                <padding>
@@ -73,6 +78,7 @@
    </top>
     <center>
 
+        
     </center>
    <bottom>
       <VBox BorderPane.alignment="CENTER">

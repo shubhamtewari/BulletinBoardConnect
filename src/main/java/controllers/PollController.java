@@ -61,8 +61,8 @@ public class PollController implements Initializable {
         questionText.setText(pollModel.getPollStructure().getPollQuestion());
         switch (pollModel.getPollStructure().getNumberOfOptions()) {
             case 2:
-                labelPollOption1.setText(pollModel.getPollStructure().getPollOptions()[0]);
-                labelPollOption2.setText(pollModel.getPollStructure().getPollOptions()[1]);
+                labelPollOption1.setText(pollModel.getPollStructure().getPollOptions().get(0));
+                labelPollOption2.setText(pollModel.getPollStructure().getPollOptions().get(1));
                 vBoxPollText.getChildren().remove(3);
                 vBoxPollText.getChildren().remove(3);
                 //vBoxPollText.getChildren().remove(3);
@@ -72,18 +72,18 @@ public class PollController implements Initializable {
                 region4.setVisible(false);
                 break;
             case 3:
-                labelPollOption1.setText(pollModel.getPollStructure().getPollOptions()[0]);
-                labelPollOption2.setText(pollModel.getPollStructure().getPollOptions()[1]);
-                labelPollOption3.setText(pollModel.getPollStructure().getPollOptions()[2]);
+                labelPollOption1.setText(pollModel.getPollStructure().getPollOptions().get(0));
+                labelPollOption2.setText(pollModel.getPollStructure().getPollOptions().get(1));
+                labelPollOption3.setText(pollModel.getPollStructure().getPollOptions().get(2));
                 vBoxPollText.getChildren().remove(4);
                 //hBox4.setVisible(false);
                 region4.setVisible(false);
                 break;
             case 4:
-                labelPollOption1.setText(pollModel.getPollStructure().getPollOptions()[0]);
-                labelPollOption2.setText(pollModel.getPollStructure().getPollOptions()[1]);
-                labelPollOption3.setText(pollModel.getPollStructure().getPollOptions()[2]);
-                labelPollOption4.setText(pollModel.getPollStructure().getPollOptions()[3]);
+                labelPollOption1.setText(pollModel.getPollStructure().getPollOptions().get(0));
+                labelPollOption2.setText(pollModel.getPollStructure().getPollOptions().get(1));
+                labelPollOption3.setText(pollModel.getPollStructure().getPollOptions().get(2));
+                labelPollOption4.setText(pollModel.getPollStructure().getPollOptions().get(3));
                 break;
         }
     }
