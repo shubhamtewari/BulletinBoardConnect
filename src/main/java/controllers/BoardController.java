@@ -2,14 +2,20 @@ package controllers;
 
 import core.*;
 import javafx.collections.FXCollections;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.geometry.Insets;
+import javafx.geometry.Pos;
+import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.util.Callback;
 import models.BoardModel;
@@ -33,6 +39,7 @@ public class BoardController implements Initializable {
     TableColumn<NoticeStructure, String> tableColumnNoticesTitle;
     TableColumn<NoticeStructure, String> tableColumnNoticesDate;
     TableColumn<NoticeStructure, Integer> tableColumnNoticesID;
+
 
     TableColumn<PollStructure, String> tableColumnPollsTitle;
     TableColumn<PollStructure, String> tableColumnPollsDate;
@@ -58,6 +65,9 @@ public class BoardController implements Initializable {
     VBox vBoxEvents;
     @FXML
     AnchorPane anchorPane;
+
+    String strDeleteId;
+    boolean pinnalbeFound = false;
 
     public BoardController(BoardModel boardModel) {
         this.boardModel = boardModel;
@@ -129,7 +139,7 @@ public class BoardController implements Initializable {
 
     /*
     void insertImageNotice() throws IOException{
-        ImageNoticeInputWindowController imageNoticeInputWindowController = new ImageNoticeInputWindowController();
+        HPPInputWindowController imageNoticeInputWindowController = new HPPInputWindowController();
         imageNoticeInputWindowController.show();
         if(imageNoticeInputWindowController.canClose) {
             String info[] = imageNoticeInputWindowController.getInformation();
@@ -204,10 +214,6 @@ public class BoardController implements Initializable {
         }
     }
 
-    void insertImageNotice() throws Exception {
-
-    }
-
     void insertPoll() throws Exception {
         PollInputWindowController pollInputWindowController = new PollInputWindowController();
         pollInputWindowController.initPollInputDataWindow();
@@ -244,6 +250,87 @@ public class BoardController implements Initializable {
             tableViewEvents.setItems(FXCollections.observableArrayList(boardModel.getBoardStructure().getPresentEventStructures()));
         }
     }
+
+    void deleteStuff() {
+        //taking input
+        Stage s = new Stage();
+        VBox vBox = new VBox();
+        vBox.setSpacing(5);
+        vBox.setAlignment(Pos.CENTER);
+        vBox.setPadding(new Insets(20));
+        TextField textField = new TextField();
+        textField.setPromptText("Enter id");
+        Button b = new Button("Delete");
+        vBox.getChildren().addAll(textField, b);
+        Scene scene = new Scene(vBox);
+        s.setScene(scene);
+        b.setOnMouseClicked(e -> { strDeleteId = textField.getText(); s.close(); });
+        s.initModality(Modality.APPLICATION_MODAL);
+        s.setTitle("Delete");
+        s.showAndWait();
+        //taking input over
+
+        //delete pinnable with strDeleteId
+        if(strDeleteId.equals("")) {
+            return;
+        }
+        else {
+            for (int i = 0;i<boardModel.getBoardStructure().getPresentEventStructures().size();i++) {
+                if((boardModel.getBoardStructure().getPresentEventStructures().get(i).getEventId()+"").equals(strDeleteId)) {
+                    boardModel.getBoardStructure().getPresentEventStructures().remove(i);
+                    pinnalbeFound = true;
+                }
+            }
+            for (int i = 0;i<boardModel.getBoardStructure().getPresentPollStructures().size();i++) {
+                if((boardModel.getBoardStructure().getPresentPollStructures().get(i).getPollTimeStamp()+"").equals(strDeleteId)) {
+                    boardModel.getBoardStructure().getPresentPollStructures().remove(i);
+                    pinnalbeFound = true;
+                }
+            }
+            for (int i = 0;i<boardModel.getBoardStructure().getPresentNoticeStructures().size();i++) {
+                if((boardModel.getBoardStructure().getPresentNoticeStructures().get(i).getNoticeTimeStamp()+"").equals(strDeleteId)) {
+                    boardModel.getBoardStructure().getPresentNoticeStructures().remove(i);
+                    pinnalbeFound = true;
+                }
+            }
+            if(pinnalbeFound) {
+                tableViewNotices.setItems(FXCollections.observableArrayList(boardModel.getBoardStructure().getPresentNoticeStructures()));
+                tableViewPolls.setItems(FXCollections.observableArrayList(boardModel.getBoardStructure().getPresentPollStructures()));
+                tableViewEvents.setItems(FXCollections.observableArrayList(boardModel.getBoardStructure().getPresentEventStructures()));
+            }
+        }
+    }
+
+    void clearStuff() {
+        Stage s = new Stage();
+        HBox hBox = new HBox();
+        Button b = new Button("Yes");
+        Button c = new Button("No");
+        Label l = new Label("Are you sure you want to delete everything?");
+        VBox v = new VBox();
+        Scene scene = new Scene(v);
+        s.setScene(scene);
+        v.setAlignment(Pos.CENTER);
+        v.setPadding(new Insets(20));
+        v.setSpacing(10);
+        hBox.setSpacing(10);
+        hBox.setAlignment(Pos.CENTER);
+        hBox.getChildren().addAll(b, c);
+        v.getChildren().addAll(l, hBox);
+        b.setOnMouseClicked(e -> {
+            boardModel.getBoardStructure().getPresentEventStructures().clear();
+            boardModel.getBoardStructure().getPresentNoticeStructures().clear();
+            boardModel.getBoardStructure().getPresentPollStructures().clear();
+            tableViewNotices.setItems(FXCollections.observableArrayList(boardModel.getBoardStructure().getPresentNoticeStructures()));
+            tableViewPolls.setItems(FXCollections.observableArrayList(boardModel.getBoardStructure().getPresentPollStructures()));
+            tableViewEvents.setItems(FXCollections.observableArrayList(boardModel.getBoardStructure().getPresentEventStructures()));
+            s.close();
+        });
+        c.setOnMouseClicked(e -> {s.close();});
+        s.initModality(Modality.APPLICATION_MODAL);
+        s.showAndWait();
+    }
+
     void populateBoardFromBoardObject(BoardStructure boardStructure) throws Exception {
         Stage stage = (Stage)hBoxBoard.getScene().getWindow();
         stage.setTitle("I.D.L.I v0.0.1 (Inter Departmental Linked Interface) - "+boardStructure.getBoardName());
@@ -251,6 +338,8 @@ public class BoardController implements Initializable {
         tableViewPolls.setItems(FXCollections.observableArrayList(boardStructure.getPresentPollStructures()));
         tableViewEvents.setItems(FXCollections.observableArrayList(boardStructure.getPresentEventStructures()));
     }
+
+
 
     //getter and setters>>>>
     public BoardModel getBoardModel() {
@@ -281,7 +370,7 @@ public class BoardController implements Initializable {
         hBoxBoard.setPrefWidth(anchorPane.getPrefWidth());
         hBoxBoard.setPrefHeight(anchorPane.getPrefHeight());
 
-        tableColumnNoticesID.setCellValueFactory(new PropertyValueFactory<>("noticeId"));
+        tableColumnNoticesID.setCellValueFactory(new PropertyValueFactory<>("noticeTimeStamp"));
         tableColumnNoticesTitle.setCellValueFactory(new PropertyValueFactory<>("noticeTitle"));
         tableColumnNoticesDate.setCellValueFactory(new PropertyValueFactory<>("noticeDate"));
         tableViewNotices.getColumns().addAll(tableColumnNoticesID, tableColumnNoticesTitle, tableColumnNoticesDate);

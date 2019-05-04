@@ -29,10 +29,13 @@ import java.util.concurrent.atomic.AtomicBoolean;
 
 import models.BoardModel;
 import models.BulletinBoxModel;
+import models.NoticeModel;
+import models.WorkspaceModel;
 
 public class BulletinBoxController implements Initializable {
     BulletinBoxModel bulletinBoxModel;
     BoardController boardController;
+    WorkspaceModel workspaceModel;
 
     FXMLLoader fxmlLoaderBoard;//fxmlloader for the board
     private FXMLLoader fxmlLoaderNoticeWindow;//fxmlLoader for the high priority windows
@@ -60,6 +63,8 @@ public class BulletinBoxController implements Initializable {
         saverAndLoader = new JSONTextFileDataController();
         databaseConnection = new FirebaseDatabaseConnectable();
         databaseManipulatable = new FirebaseDatabaseManipulator();
+
+        workspaceModel = new WorkspaceModel();
 
         fxmlLoaderBoard = new FXMLLoader(getClass().getResource("/boardlayout.fxml"));
         fxmlLoaderNoticeWindow = new FXMLLoader(getClass().getResource("/highprioritynoticelayout.fxml"));
@@ -93,6 +98,8 @@ public class BulletinBoxController implements Initializable {
     @FXML
     MenuItem menuItemSave;
     @FXML
+    MenuItem menuItemSaveAs;
+    @FXML
     MenuItem menuItemUpload;
     @FXML
     MenuItem menuItemInsertEvent;
@@ -119,12 +126,12 @@ public class BulletinBoxController implements Initializable {
     void setDisableOnStartViews(boolean b) {
         menuItemInsertNotice.setDisable(b);
         menuItemInsertPoll.setDisable(b);
-        //menuItemWidget.setDisable(b);
         menuItemDelete.setDisable(b);
         menuItemClear.setDisable(b);
-        //menuItemSort.setDisable(b);
         menuItemClose.setDisable(b);
         menuItemInsertEvent.setDisable(b);
+        menuItemSave.setDisable(b);
+        menuItemSaveAs.setDisable(b);
     }
 
     /**
@@ -233,16 +240,6 @@ public class BulletinBoxController implements Initializable {
     }
 
     @FXML
-    void onInsertImageNotice() {
-        try {
-            boardController.insertImageNotice();
-        }catch (Exception e) {
-            System.out.println("Could not insert image notice:(");
-            e.printStackTrace();
-        }
-    }
-
-    @FXML
     void onInsertPoll() {
         try {
             boardController.insertPoll();
@@ -266,14 +263,56 @@ public class BulletinBoxController implements Initializable {
 
     @FXML
     void onInsertHighPriorityNotice() {
-        Stage stageHighPriorityNoticeWindow = new Stage();
-        try {
-            stageHighPriorityNoticeWindow.setScene(new Scene(fxmlLoaderNoticeWindow.load()));
-        } catch (IOException e) {
-            e.printStackTrace();
+
+        //passing the stage so tht the size of the notice image can be set to the same
+        HPPInputWindowController hppInputWindowController = new HPPInputWindowController((Stage)hBoxWidgetBar.getScene().getWindow());
+        hppInputWindowController.show();
+        if(hppInputWindowController.validClose) {
+            UploadInputController uploadInputController = new UploadInputController();
+            if (!uploadInputController.isValidClose) {
+                return;
+            }
+            labelStatusText.setText("Uploading Administrative Notice Data.....");
+            try {
+                Task task = new Task() {
+                    @Override
+                    protected Object call() throws Exception {
+                        String stringInfo[] = hppInputWindowController.getInformation();
+                        NoticeModel noticeModel = new NoticeModel(stringInfo[0], stringInfo[1], stringInfo[3], new CustomerStructure(stringInfo[2]));
+                        if (true) {
+                            if (hppInputWindowController.fileImage != null) {
+                                databaseManipulatable.uploadHPP(hppInputWindowController.fileImage, true, noticeModel.getNoticeStructure(), uploadInputController.workSpaceName);
+                            }
+                        } else {
+                            if (hppInputWindowController.fileImage != null) {
+                                databaseManipulatable.uploadHPP(hppInputWindowController.fileImage, false, noticeModel.getNoticeStructure(), uploadInputController.workSpaceName);
+                            }
+                        }
+
+                        Platform.runLater(new Runnable() {
+                            @Override
+                            public void run() {
+                                labelStatusText.setText("Administrative notice successfully Uploaded:)");
+                                SmallErrorDialogController adminNoticeUploadSuccess = new SmallErrorDialogController(SmallErrorDialogController.INFO,
+                                        "Administrative Notice Successfully Uploaded", "Okay");
+                                adminNoticeUploadSuccess.showDialogAndWait();
+                            }
+                        });
+                        return null;
+                    }
+                };
+                Thread t = new Thread(task);
+                t.setDaemon(true);
+                t.start();
+            } catch (Exception e) {
+                labelStatusText.setText("Administrative notice upload failed, check your internet connection:(");
+                SmallErrorDialogController adminNoticeUploadSuccess = new SmallErrorDialogController(SmallErrorDialogController.INFO,
+                        "Administrative Notice Upload Failed", "Okay");
+                adminNoticeUploadSuccess.showDialogAndWait();
+            }
         }
-        stageHighPriorityNoticeWindow.show();
     }
+
 
     public void OnAddTimeDateDayWidget(ActionEvent actionEvent) throws IOException {
         FXMLLoader fxmlLoaderTimeDateDay = new FXMLLoader(getClass().getResource("/datewidgetlayout.fxml"));
@@ -326,6 +365,32 @@ public class BulletinBoxController implements Initializable {
             e.printStackTrace();
         }
     }
+
+    @FXML
+    void onDelete() {
+        try {
+            boardController.deleteStuff();
+            if(boardController.pinnalbeFound) {
+                labelStatusText.setText("Sucessfully deleted pinnable with delete id "+boardController.strDeleteId+" :)");
+            }
+            else {
+                labelStatusText.setText("Pinnable with given id "+boardController.strDeleteId+" not found:(");
+            }
+        }catch (Exception e) {
+            e.printStackTrace();
+            labelStatusText.setText("Couldn't delete:(");
+        }
+    }
+
+    @FXML
+    void onClear() {
+        try {
+            boardController.clearStuff();
+        }catch (Exception e) {
+            e.printStackTrace();
+            labelStatusText.setText("Clear failed:(");
+        }
+    }
     //insert menu options MVC listeners end<<<<
 
     //file menu option MVC listeners begin>>>>>
@@ -369,6 +434,7 @@ public class BulletinBoxController implements Initializable {
         isboardAlive = true;
         //enable the views required now
         setDisableOnStartViews(false);
+        menuItemSave.setDisable(true);
     }
 
     @FXML
@@ -377,25 +443,33 @@ public class BulletinBoxController implements Initializable {
         fileCurrentFocused = fileChooser.showSaveDialog(null);
         try {
             saverAndLoader.saveAsFile(boardController.getBoardModel().getBoardStructure(),fileCurrentFocused);
+        }catch (NullPointerException e) {
+            labelStatusText.setText("No board open:(");
+            e.printStackTrace();
+            return;
         }catch (Exception e) {
-            labelStatusText.setText("Error saving as board:(");
+            labelStatusText.setText("Couldn't save board:(");
             e.printStackTrace();
             return;
         }
         labelStatusText.setText("Board saved as successfully:) : "+boardController.getBoardModel().getBoardStructure().getBoardName());
-        //menuItemLoad.setDisable(false);
-    }
+        menuItemSave.setDisable(false);
+    }//abhinav arora
 
     @FXML
     void onSaveBoard() {
         try {
             saverAndLoader.saveAsFile(boardController.getBoardModel().getBoardStructure(),fileCurrentFocused);
+        }catch (NullPointerException e) {
+            labelStatusText.setText("No board open:(");
+            e.printStackTrace();
+            return;
         }catch (Exception e) {
-            System.out.println("Failed to save board:(");
+            labelStatusText.setText("Failed to save board:(");
             e.printStackTrace();
             return;
         }
-        System.out.println("Board Saved successfully:) : "+boardController.getBoardModel().getBoardStructure().getBoardName());
+        labelStatusText.setText("Board Saved successfully:) : "+boardController.getBoardModel().getBoardStructure().getBoardName());
     }
 
     @FXML
@@ -509,14 +583,22 @@ public class BulletinBoxController implements Initializable {
     }
     @FXML
     void onUpload() {
-        try {
-            databaseManipulatable.testUpload(databaseConnection, boardController.getBoardModel().getBoardStructure());
-        }catch (Exception e) {
-            labelStatusText.setText("Test failed:(");
-            e.printStackTrace();
+        UploadInputController uploadInputController = new UploadInputController();
+        if(boardController==null&&uploadInputController.isValidClose) {
+            SmallErrorDialogController errorNoBoard = new SmallErrorDialogController(SmallErrorDialogController.ERROR, "No board opened.", "Okay");
+            errorNoBoard.showDialogAndWait();
             return;
         }
-        labelStatusText.setText("Sucessfully uploaded board:)");
+        if(uploadInputController.isValidClose) {
+            try {
+                databaseManipulatable.uploadBoard(boardController.getBoardModel().getBoardStructure(), uploadInputController.workSpaceName);
+            }catch (Exception e) {
+                labelStatusText.setText("Test failed:(");
+                e.printStackTrace();
+                return;
+            }
+            labelStatusText.setText("Sucessfully uploaded board:)");
+        }
     }
     @FXML
     void onDisconnect() {

@@ -34,6 +34,7 @@ public class SmallErrorDialogController {
         stage.setScene(scene);
         stage.initModality(Modality.APPLICATION_MODAL);
         stage.initStyle(StageStyle.UNDECORATED);
+        stage.setAlwaysOnTop(true);
 
         labelMessage = new Label();
         buttonClick = new Button();

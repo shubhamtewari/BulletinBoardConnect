@@ -1,0 +1,583 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="86754581-9d88-4da7-824a-7ece68d086d3" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/lib.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GhurdauriBulletinBox.iml" beforeDir="false" afterPath="$PROJECT_DIR$/GhurdauriBulletinBox.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/keypath.txt" beforeDir="false" afterPath="$PROJECT_DIR$/keypath.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Main.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/api/APIKey.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/api/APIKey.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/api/Clouds.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/api/Clouds.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/api/Days.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/api/Days.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/api/OpenWeatherMapJSONDataRetriever.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/api/OpenWeatherMapJSONDataRetriever.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/api/Temperature.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/api/Temperature.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/api/Weather.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/api/Weather.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/api/WeatherDataRetriever.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/api/WeatherDataRetriever.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/api/WeatherStructure.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/api/WeatherStructure.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/api/Wind.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/api/Wind.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/controllers/BoardController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/controllers/BoardController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/controllers/BulletinBoxController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/controllers/BulletinBoxController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/controllers/ConnectDialogController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/controllers/ConnectDialogController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/controllers/DetailsWindowController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/controllers/DetailsWindowController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/controllers/EventInputWindowController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/controllers/EventInputWindowController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/controllers/HighPriorityNoticeController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/controllers/HighPriorityNoticeController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/controllers/NoticeController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/controllers/NoticeController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/controllers/NoticeInputWindowController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/controllers/NoticeInputWindowController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/controllers/PollController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/controllers/PollController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/controllers/PollInputWindowController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/controllers/PollInputWindowController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/controllers/SmallErrorDialogController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/controllers/SmallErrorDialogController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/controllers/TimeDateDayWidgetController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/controllers/TimeDateDayWidgetController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/controllers/WeatherInputStageController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/controllers/WeatherInputStageController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/core/BoardStructure.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/core/BoardStructure.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/core/CustomerStructure.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/core/CustomerStructure.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/core/DataController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/core/DataController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/core/EventStructure.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/core/EventStructure.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/core/JSONTextFileDataController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/core/JSONTextFileDataController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/core/NoticeStructure.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/core/NoticeStructure.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/core/Pinnable.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/core/Pinnable.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/core/PollStructure.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/core/PollStructure.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/database/DatabaseConnectable.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/database/DatabaseConnectable.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/database/DatabaseManipulatable.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/database/DatabaseManipulatable.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/database/FirebaseDatabaseConnectable.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/database/FirebaseDatabaseConnectable.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/database/FirebaseDatabaseManipulator.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/database/FirebaseDatabaseManipulator.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/database/JongoDatabaseConnection.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/database/JongoDatabaseConnection.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/database/JongoDatabaseManipulator.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/database/JongoDatabaseManipulator.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/exceptions/DuplicateConnectionToDatabaseException.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/exceptions/DuplicateConnectionToDatabaseException.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/models/BoardModel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/models/BoardModel.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/models/BulletinBoxModel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/models/BulletinBoxModel.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/models/EventModel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/models/EventModel.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/models/NoticeModel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/models/NoticeModel.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/models/PollModel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/models/PollModel.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/boardlayout.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/boardlayout.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/bulletinboxlayout.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/bulletinboxlayout.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/datewidgetlayout.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/datewidgetlayout.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/highprioritynoticelayout.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/highprioritynoticelayout.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/noticelayout.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/noticelayout.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/polllayout.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/polllayout.fxml" afterDir="false" />
+    </list>
+    <ignored path="$PROJECT_DIR$/out/" />
+    <ignored path="$PROJECT_DIR$/target/" />
+    <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="DefaultGradleProjectSettings">
+    <option name="isMigrated" value="true" />
+  </component>
+  <component name="FileEditorManager">
+    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/database/FirebaseDatabaseManipulator.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="202">
+              <caret line="31" column="2" selection-start-line="31" selection-start-column="2" selection-end-line="31" selection-end-column="2" />
+              <folding>
+                <element signature="imports" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/database/JongoDatabaseConnection.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="119">
+              <caret line="12" column="13" selection-start-line="12" selection-start-column="13" selection-end-line="12" selection-end-column="13" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/main/java/database/FirebaseDatabaseConnectable.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="204">
+              <caret line="27" column="75" lean-forward="true" selection-start-line="27" selection-start-column="75" selection-end-line="27" selection-end-column="75" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/models/EventModel.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="68">
+              <caret line="7" column="13" selection-start-line="7" selection-start-column="13" selection-end-line="7" selection-end-column="13" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/controllers/BulletinBoxController.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="663">
+              <caret line="69" column="85" selection-start-line="69" selection-start-column="85" selection-end-line="69" selection-end-column="85" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/resources/bulletinboxlayout.fxml">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="612">
+              <caret line="36" column="64" selection-start-line="36" selection-start-column="64" selection-end-line="36" selection-end-column="64" />
+            </state>
+          </provider>
+          <provider editor-type-id="JavaFX-Scene-Builder" />
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/resources/highprioritynoticelayout.fxml">
+          <provider selected="true" editor-type-id="text-editor" />
+          <provider editor-type-id="JavaFX-Scene-Builder" />
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/controllers/ImageNoticeInputWindowController.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="595">
+              <caret line="45" column="29" selection-start-line="45" selection-start-column="29" selection-end-line="45" selection-end-column="29" />
+              <folding>
+                <element signature="e#2865#2866#0" expanded="true" />
+                <element signature="e#2899#2900#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/controllers/HPPInputWindowController.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="518">
+              <caret line="83" column="60" selection-start-line="83" selection-start-column="60" selection-end-line="83" selection-end-column="60" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/controllers/HighPriorityNoticeController.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="969">
+              <caret line="68" selection-start-line="68" selection-end-line="68" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+    </leaf>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="IdeDocumentHistory">
+    <option name="CHANGED_PATHS">
+      <list>
+        <option value="$PROJECT_DIR$/src/main/java/controllers/BoardController.java" />
+        <option value="$PROJECT_DIR$/src/main/java/controllers/HighPriorityNoticeController.java" />
+        <option value="$PROJECT_DIR$/src/main/java/database/FirebaseDatabaseManipulator.java" />
+        <option value="$PROJECT_DIR$/src/main/java/database/FirebaseDatabaseConnectable.java" />
+      </list>
+    </option>
+  </component>
+  <component name="MavenImportPreferences">
+    <option name="importingSettings">
+      <MavenImportingSettings>
+        <option name="importAutomatically" value="true" />
+      </MavenImportingSettings>
+    </option>
+  </component>
+  <component name="ProjectFrameBounds" extendedState="6">
+    <option name="x" value="-156" />
+    <option name="y" value="12" />
+    <option name="width" value="1386" />
+    <option name="height" value="788" />
+  </component>
+  <component name="ProjectView">
+    <navigator proportions="" version="1">
+      <foldersAlwaysOnTop value="true" />
+    </navigator>
+    <panes>
+      <pane id="ProjectPane">
+        <subPane>
+          <expand>
+            <path>
+              <item name="BulletinBoardConnect" type="b2602c69:ProjectViewProjectNode" />
+              <item name="BulletinBoardConnect" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="BulletinBoardConnect" type="b2602c69:ProjectViewProjectNode" />
+              <item name="BulletinBoardConnect" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="BulletinBoardConnect" type="b2602c69:ProjectViewProjectNode" />
+              <item name="BulletinBoardConnect" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="BulletinBoardConnect" type="b2602c69:ProjectViewProjectNode" />
+              <item name="BulletinBoardConnect" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="BulletinBoardConnect" type="b2602c69:ProjectViewProjectNode" />
+              <item name="BulletinBoardConnect" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+              <item name="controllers" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="BulletinBoardConnect" type="b2602c69:ProjectViewProjectNode" />
+              <item name="BulletinBoardConnect" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+              <item name="core" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="BulletinBoardConnect" type="b2602c69:ProjectViewProjectNode" />
+              <item name="BulletinBoardConnect" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+              <item name="database" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="BulletinBoardConnect" type="b2602c69:ProjectViewProjectNode" />
+              <item name="BulletinBoardConnect" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+              <item name="exceptions" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="BulletinBoardConnect" type="b2602c69:ProjectViewProjectNode" />
+              <item name="BulletinBoardConnect" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+              <item name="models" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="BulletinBoardConnect" type="b2602c69:ProjectViewProjectNode" />
+              <item name="BulletinBoardConnect" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="resources" type="462c0819:PsiDirectoryNode" />
+            </path>
+          </expand>
+          <select />
+        </subPane>
+      </pane>
+      <pane id="PackagesPane" />
+      <pane id="Scope" />
+    </panes>
+  </component>
+  <component name="PropertiesComponent">
+    <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
+    <property name="last_opened_file_path" value="C:/BulletinBoardConnect" />
+    <property name="project.structure.last.edited" value="Libraries" />
+    <property name="project.structure.proportion" value="0.0" />
+    <property name="project.structure.side.proportion" value="0.0" />
+  </component>
+  <component name="RunDashboard">
+    <option name="ruleStates">
+      <list>
+        <RuleState>
+          <option name="name" value="ConfigurationTypeDashboardGroupingRule" />
+        </RuleState>
+        <RuleState>
+          <option name="name" value="StatusDashboardGroupingRule" />
+        </RuleState>
+      </list>
+    </option>
+  </component>
+  <component name="RunManager">
+    <configuration name="Main" type="Application" factoryName="Application" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="Main" />
+      <module name="GhurdauriBulletinBox" />
+      <option name="VM_PARAMETERS" value="--module-path &quot;C:\Program Files\javafx-sdk-11.0.2\lib&quot; --add-modules javafx.controls,javafx.fxml,javafx.base" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+  </component>
+  <component name="SvnConfiguration">
+    <configuration />
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="86754581-9d88-4da7-824a-7ece68d086d3" name="Default Changelist" comment="" />
+      <created>1556437681133</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1556437681133</updated>
+    </task>
+    <servers />
+  </component>
+  <component name="ToolWindowManager">
+    <frame x="-8" y="-8" width="1382" height="784" extended-state="6" />
+    <layout>
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.25869894" />
+      <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
+      <window_info id="Image Layers" order="2" />
+      <window_info id="Designer" order="3" />
+      <window_info id="UI Designer" order="4" />
+      <window_info id="Capture Tool" order="5" />
+      <window_info id="Favorites" order="6" side_tool="true" />
+      <window_info anchor="bottom" id="Message" order="0" />
+      <window_info anchor="bottom" id="Find" order="1" />
+      <window_info anchor="bottom" id="Run" order="2" weight="0.32872504" />
+      <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
+      <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
+      <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
+      <window_info anchor="bottom" id="TODO" order="6" />
+      <window_info anchor="bottom" id="Terminal" order="7" weight="0.32872504" />
+      <window_info anchor="bottom" id="Event Log" order="8" side_tool="true" />
+      <window_info anchor="bottom" id="Version Control" order="9" weight="0.32872504" />
+      <window_info anchor="bottom" id="Messages" order="10" weight="0.32872504" />
+      <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
+      <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
+      <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
+      <window_info anchor="right" id="Palette" order="3" />
+      <window_info anchor="right" id="Maven" order="4" />
+      <window_info anchor="right" id="Theme Preview" order="5" />
+      <window_info anchor="right" id="Capture Analysis" order="6" />
+      <window_info anchor="right" id="Palette&#9;" order="7" />
+      <window_info anchor="right" id="Coverage" order="8" side_tool="true" weight="0.32980332" />
+    </layout>
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State>
+              <option name="RECENTLY_FILTERED_USER_GROUPS">
+                <collection />
+              </option>
+              <option name="RECENTLY_FILTERED_BRANCH_GROUPS">
+                <collection />
+              </option>
+              <option name="COLUMN_ORDER">
+                <list>
+                  <option value="0" />
+                  <option value="1" />
+                  <option value="2" />
+                  <option value="3" />
+                </list>
+              </option>
+            </State>
+          </value>
+        </entry>
+      </map>
+    </option>
+    <option name="RECENT_FILTERS">
+      <map>
+        <entry key="Branch">
+          <value>
+            <list />
+          </value>
+        </entry>
+        <entry key="User">
+          <value>
+            <list />
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+  <component name="com.intellij.coverage.CoverageDataManagerImpl">
+    <SUITE FILE_PATH="coverage/BulletinBoardConnect$Main.ic" NAME="Main Coverage Results" MODIFIED="1556455008014" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
+  </component>
+  <component name="editorHistoryManager">
+    <entry file="file://$PROJECT_DIR$/src/main/java/controllers/NoticeInputWindowController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-340">
+          <caret line="14" column="13" selection-start-line="14" selection-start-column="13" selection-end-line="14" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/controllers/NoticeController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="68">
+          <caret line="15" column="13" selection-start-line="15" selection-start-column="13" selection-end-line="15" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/resources/boardlayout.fxml">
+      <provider editor-type-id="text-editor" />
+      <provider selected="true" editor-type-id="JavaFX-Scene-Builder" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/controllers/BoardController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="3230">
+          <caret line="215" selection-start-line="215" selection-end-line="215" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/models/EventModel.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="68">
+          <caret line="7" column="13" selection-start-line="7" selection-start-column="13" selection-end-line="7" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/controllers/BulletinBoxController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="663">
+          <caret line="69" column="85" selection-start-line="69" selection-start-column="85" selection-end-line="69" selection-end-column="85" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/resources/bulletinboxlayout.fxml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="612">
+          <caret line="36" column="64" selection-start-line="36" selection-start-column="64" selection-end-line="36" selection-end-column="64" />
+        </state>
+      </provider>
+      <provider editor-type-id="JavaFX-Scene-Builder" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/resources/highprioritynoticelayout.fxml">
+      <provider selected="true" editor-type-id="text-editor" />
+      <provider editor-type-id="JavaFX-Scene-Builder" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/controllers/ImageNoticeInputWindowController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="595">
+          <caret line="45" column="29" selection-start-line="45" selection-start-column="29" selection-end-line="45" selection-end-column="29" />
+          <folding>
+            <element signature="e#2865#2866#0" expanded="true" />
+            <element signature="e#2899#2900#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/controllers/HighPriorityNoticeController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="969">
+          <caret line="68" selection-start-line="68" selection-end-line="68" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/controllers/HPPInputWindowController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="518">
+          <caret line="83" column="60" selection-start-line="83" selection-start-column="60" selection-end-line="83" selection-end-column="60" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/database/FirebaseDatabaseManipulator.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="202">
+          <caret line="31" column="2" selection-start-line="31" selection-start-column="2" selection-end-line="31" selection-end-column="2" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/database/JongoDatabaseConnection.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="119">
+          <caret line="12" column="13" selection-start-line="12" selection-start-column="13" selection-end-line="12" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/database/FirebaseDatabaseConnectable.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="204">
+          <caret line="27" column="75" lean-forward="true" selection-start-line="27" selection-start-column="75" selection-end-line="27" selection-end-column="75" />
+        </state>
+      </provider>
+    </entry>
+  </component>
+  <component name="masterDetails">
+    <states>
+      <state key="ArtifactsStructureConfigurable.UI">
+        <settings>
+          <artifact-editor />
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
+                <option value="0.2" />
+              </list>
+            </option>
+          </splitter-proportions>
+        </settings>
+      </state>
+      <state key="FacetStructureConfigurable.UI">
+        <settings>
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
+                <option value="0.2" />
+              </list>
+            </option>
+          </splitter-proportions>
+        </settings>
+      </state>
+      <state key="GlobalLibrariesConfigurable.UI">
+        <settings>
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
+                <option value="0.2" />
+              </list>
+            </option>
+          </splitter-proportions>
+        </settings>
+      </state>
+      <state key="JdkListConfigurable.UI">
+        <settings>
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
+                <option value="0.2" />
+              </list>
+            </option>
+          </splitter-proportions>
+        </settings>
+      </state>
+      <state key="ModuleStructureConfigurable.UI">
+        <settings>
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
+                <option value="0.2" />
+              </list>
+            </option>
+          </splitter-proportions>
+        </settings>
+      </state>
+      <state key="ProjectJDKs.UI">
+        <settings>
+          <last-edited>12</last-edited>
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
+                <option value="0.2" />
+              </list>
+            </option>
+          </splitter-proportions>
+        </settings>
+      </state>
+      <state key="ProjectLibrariesConfigurable.UI">
+        <settings>
+          <last-edited>lib</last-edited>
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
+                <option value="0.2" />
+              </list>
+            </option>
+          </splitter-proportions>
+        </settings>
+      </state>
+    </states>
+  </component>
+</project>

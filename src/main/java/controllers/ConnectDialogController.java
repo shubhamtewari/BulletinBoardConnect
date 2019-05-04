@@ -3,15 +3,21 @@ package controllers;
 import database.DatabaseConnectable;
 import database.FirebaseDatabaseConnectable;
 import exceptions.DuplicateConnectionToDatabaseException;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.geometry.Insets;
+import javafx.geometry.Orientation;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.ListCell;
+import javafx.scene.control.ListView;
 import javafx.scene.layout.VBox;
 import javafx.stage.FileChooser;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
+import javafx.util.Callback;
 
 import java.io.*;
 
@@ -61,17 +67,15 @@ public class ConnectDialogController {
             buttonChooseKey = new Button("Choose Private Key");
             buttonUsePreviousPath = new Button("Use Previous Path");
             labelLogin = new Label("Connect to database");
-
             isConnectionEstablished = false;
             wasDuplicateConnection = false;
-
             this.databaseConnection = databaseConnection;
             this.connectDialogIsBoardOnline = connectDialogIsBoardOnline;
 
             fileChooser = new FileChooser();
 
             stage = new Stage();
-            scene = new Scene(vBox, 300, 200);
+            scene = new Scene(vBox, 300, 300);
             stage.setScene(scene);
 
             init();
@@ -96,7 +100,7 @@ public class ConnectDialogController {
                 File filePrivateKey;
                 String path;
                 filePrivateKey = fileChooser.showOpenDialog(null);
-                path = filePrivateKey.getAbsolutePath();
+                //path = filePrivateKey.getAbsolutePath();
                 if (filePrivateKey == null) {
                     return;
                 } else {

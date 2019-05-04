@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+
+<HBox fx:id="hBox" alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" spacing="5.0" xmlns="http://javafx.com/javafx/8.0.192" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.TimeDateDayWidgetController">
+   <children>
+      <Label fx:id="labelTime" text="00:00:00">
+         <font>
+            <Font size="30.0" />
+         </font>
+      </Label>
+      <VBox fx:id="vBox" alignment="CENTER">
+         <children>
+            <Label fx:id="labelDate" text="DD/MM/YY" />
+            <Label fx:id="labelDay" text="Sunday" />
+         </children>
+      </VBox>
+   </children>
+</HBox>
